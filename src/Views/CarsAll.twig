@@ -1,0 +1,33 @@
+{% include '/Partials/top.html' %}
+{% include '/Partials/menu.html' %}
+
+<table>
+<h1> Bilar </h1>
+  <th> Registration </th>
+  <th> Make </th>
+  <th> Color </th>
+  <th> Year </th>
+  <th> Price </th>
+  <th> Rented by </th>
+  <th> Rented from </th>
+
+  {%  for value in carArray %}
+  <tr>
+        <td> {{ value.Registration }}</td>
+        <td> {{ value.Make }}</td>
+        <td> {{ value.Color }}</td>
+        <td> {{ value.Year }} </td>
+        <td> {{ value.Price }}</td>
+        <td> {{ value['Rented by'] }}</td>
+  </tr>
+  {%  endfor %}
+       {#
+       <td> {{ value['Rented from'] }}</td>
+        edit td
+        remove td
+        </tr>
+        #}
+
+  </table>
+
+{% include '/Partials/bottom.html' %}

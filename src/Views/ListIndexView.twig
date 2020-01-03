@@ -1,0 +1,22 @@
+<h1>List Index</h1>
+<p>
+
+{% if personArray is not null  %}
+  {%  for index in firstIndex..lastIndex %}
+  <ul>
+      Index: {{index}}
+      <ul>
+        <li>{{personArray[index].name}}</li>
+        <li>{{personArray[index].address}}</li>
+        <li>{{personArray[index].phone}}</li>
+      </ul>
+    </li>
+  </ul>
+  {%  endfor %}
+{% else %}
+  No interval {{firstIndex}} to {{lastIndex}}.
+{% endif %}
+<p>
+<form method="post" action="/">
+  <input type="submit" value="Main Menu">
+</form>

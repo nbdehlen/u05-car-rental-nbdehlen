@@ -1,0 +1,23 @@
+{% include '/Partials/top.html' %}
+{% include '/Partials/menu.html' %}
+
+<table>
+<h1> Lägg till kund </h1>
+   <form method="post" action="">
+    <label for="Personnummer">
+    <input type="submit" name="Personnummer" required>
+    </form>
+
+  {%  for value in personArray %}
+  <tr>
+        <td> {{ value['Personal number'] }}</td>
+        <td> {{ value['Full name'] }}</td>
+        <td> {{ value.Address }}</td>
+        <td> {{ value['Postal address'] }} </td>
+        <td> {{ value['Phone number'] }}</td>
+  </tr>
+  {%  endfor %}
+
+  </table>
+
+{% include '/Partials/bottom.html' %}

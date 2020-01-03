@@ -1,0 +1,12 @@
+{
+    "description": "w/e bud",
+    "name": "vagrant/u05-car",
+    "require": {
+        "twig/twig": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Main\\": "src"
+        }
+    }
+}

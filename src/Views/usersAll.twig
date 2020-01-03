@@ -1,0 +1,24 @@
+{% include '/Partials/top.html' %}
+{% include '/Partials/menu.html' %}
+
+<table>
+<h1> Kunder </h1>
+  <th> Personnummer </th>
+  <th> Namn </th>
+  <th> Address </th>
+  <th> Postaddress </th>
+  <th> Telefonnummer </th>
+
+  {%  for value in personArray %}
+  <tr>
+        <td> {{ value['Personal number'] }}</td>
+        <td> {{ value['Full name'] }}</td>
+        <td> {{ value.Address }}</td>
+        <td> {{ value['Postal address'] }} </td>
+        <td> {{ value['Phone number'] }}</td>
+  </tr>
+  {%  endfor %}
+
+  </table>
+
+{% include '/Partials/bottom.html' %}

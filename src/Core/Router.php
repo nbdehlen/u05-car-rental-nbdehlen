@@ -41,9 +41,9 @@
           $lastIndex = $form["lastIndex"];
           return $controller->listIndex($twig, $firstIndex, $lastIndex);
         }
-        else if ($path == "/userAdd") {
+        else if ($path == "/UserAdd") {
           $controller = new UsersController();
-          return $controller->userAdd($twig);
+          return $controller->UserAdd($twig);
           /*, $PersonNumber, $Name, $Address, $PostalAddress, 
           $PhoneNumber);*/
         }

@@ -2,7 +2,7 @@
 {% include '/Partials/menu.html' %}
 
 <h1> Lägg till kund </h1>
-   <form method="post" name="addCustomer" action="" onsubmit="return addCustomerCtrl();">
+   <form method="post" name="addCustomer" action="/UserAdd" onsubmit="return addCustomerCtrl();">
    <label for="personnummer"> Personnummer: </label>
   <input type="number" id="personnummer" name="PersonNumber" placeholder="tio siffror" required> <br>
 
@@ -17,7 +17,7 @@
 
   <label for="telefonnummer"> Telefonnummer: </label>
   <input type="number" id="telefonnummer" name="telefonnummer" required> <br>
-
    <input type="submit" value="Submit">
     </form>
+    
 {% include '/Partials/bottom.html' %}

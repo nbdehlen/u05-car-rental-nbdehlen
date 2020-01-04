@@ -11,26 +11,34 @@ class UsersController extends Model {
     //reference to the users class.
     //Second reason is if we have multiple tables or classes this is an easier way
     public function userAdd($twig) {
-        return $twig->loadTemplate("userAdd.twig")->render([]);
+        if (isset($_POST['PersonNumber'])) {
+            echo "CreateUser osv";
+            var_dump($_POST);
+            $this->createUser();
+            return $twig->loadTemplate("UserAdd.twig")->render([]);
+        } else {
+            echo "yoyo userAdd";
+            var_dump($_POST);
+            return $twig->loadTemplate("UserAdd.twig")->render([]);
+        }
     }
     
-    public function createUser($twig) {
-        
-        if (isset($_POST['Personal Number'])) {
-        $form = new request;
+    public function createUser(/*$twig*/) {
+        echo "accessing createUser function";
+       /* $form = new request;
         $form->getForm();
         var_dump($form->getForm());
 
-        //$map = ["personArray" => $personArray];
-
-        //$this->setUser($PersonNumber, $Name, $Address, 
-        //$PostalAddress, $PhoneNumber);
+        $map = ["" => $];*/
+        $PersonNumber = $_POST['PersonNumber'];
+        $Name = $_POST['FullName'];
+        $Address = $_POST['Address'];
+        $PostalAddress = $_POST['PostalAddress'];
+        $PhoneNumber = $_POST['telefonnummer'];
         $this->setUser($PersonNumber, $Name, $Address, $PostalAddress, $PhoneNumber);
+        //$this->setUser($PersonNumber, $Name, $Address, $PostalAddress, $PhoneNumber);
 
-        return $twig->loadTemplate("UserAdd.twig")->render($form);
-    } else {
-        echo "something is wrong";
-    }
+        //return $twig->loadTemplate("UserAdd.twig")->render($form);
     }
 
     public function getUser($twig) {

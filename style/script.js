@@ -1,12 +1,12 @@
 function addCustomerCtrl() {
-    let pn = document.querySelector("#personnummer").value;
-    let tel = document.querySelector("#telefonnummer").value;
+    const pn = document.querySelector("#personnummer").value;
+    const tel = document.querySelector("#telefonnummer").value;
 
-    let pnReq = /[0-9]{2}(?:0[1-9]|1[12])[0-3][0-9][0-9]{4}/g;
-    let pnMatch = pn.match(pnReq);
+    const pnReq = /[0-9]{2}(?:0[1-9]|1[12])[0-3][0-9][0-9]{4}/g;
+    const pnMatch = pn.match(pnReq);
 
-    let teleReq = /^0/g;
-    let teleMatch = tel.match(teleReq);
+    const teleReq = /^0/g;
+    const teleMatch = tel.match(teleReq);
 
     if (teleMatch && tel.length == 10) {
         if (pnMatch && pn.length == 10) {

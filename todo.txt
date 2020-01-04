@@ -1,0 +1,7 @@
+bigint for personnummer
+month/day regExp
+add / remove customer next to each customer on "Kunder" view.
+
+add car
+
+link history-checkout-checkin

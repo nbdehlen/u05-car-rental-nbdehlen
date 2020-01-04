@@ -3,7 +3,7 @@ CREATE DATABASE car_rental;
 USE car_rental;
 
 CREATE TABLE `Customers` (
-  `Personal number` BIGINT NOT NULL,
+  `Personal number` BIGINT,
   `Full name` VARCHAR(100) NOT NULL,
   `Address` VARCHAR(256) NOT NULL,
   `Postal address` VARCHAR(256) NOT NULL,
@@ -16,32 +16,28 @@ CREATE TABLE Cars (
   `Color` VARCHAR(20) NOT NULL,
   `Year` INTEGER(4) UNSIGNED NOT NULL,
   `Price` INTEGER UNSIGNED NOT NULL,
-  `Rented by` VARCHAR(50) NOT NULL,
+  `Rented by` VARCHAR(50),
   PRIMARY KEY(`Registration`),
-  `Personal number` BIGINT NOT NULL,
+  `Personal number` BIGINT,
   FOREIGN KEY (`Personal number`) REFERENCES Customers(`Personal number`));
-
-ALTER TABLE Cars (
-`Rented from` VARCHAR(50) NOT NULL DEFAULT "Free",
-FOREIGN KEY (`Rented from`) REFERENCES History(`Rented from`));
 
 CREATE TABLE `Allowed Colors` (
 `Colors` VARCHAR(20) NOT NULL KEY);
 
 CREATE TABLE `Allowed Makers` (
   `Makers` VARCHAR(20) NOT NULL KEY);
-
+  
 CREATE TABLE `History` (
   `Registration` VARCHAR(6) NOT NULL,
-  `Personal number` BIGINT NOT NULL,
-  `Rented from` VARCHAR(50) NOT NULL DEFAULT "Free",
+  `Personal number` BIGINT,
+  `Rented from` VARCHAR(50) DEFAULT "Free",
   `Rented until` VARCHAR(50) NOT NULL,
   `Cost` INTEGER NOT NULL,
   PRIMARY KEY (`Rented from`),
   FOREIGN KEY (`Registration`) REFERENCES Cars(`Registration`),
   FOREIGN KEY (`Personal number`) REFERENCES Customers(`Personal number`));
   
-ALTER TABLE Cars ADD `Rented from` VARCHAR(50) NOT NULL DEFAULT "Free";
+ALTER TABLE Cars ADD `Rented from` VARCHAR(50);
 ALTER TABLE Cars ADD FOREIGN KEY (`Rented from`) REFERENCES `History`(`Rented from`);
 
 
@@ -67,13 +63,13 @@ INSERT INTO Customers (
 
 INSERT INTO Cars (
   `Registration`, `Make`, `Color`, `Year`, `Price`)
-  VALUES(
-  "ABC123", "Toyota", "Gold", 1990, 200);
-
-INSERT INTO Cars (
-  `Registration`, `Make`, `Color`, `Year`, `Price`)
-  VALUES(
-  "GAD931", "Volvo", "White", 1989, 100);
+  VALUES
+  ("ABC123", "Toyota", "Gold", 1990, 200),
+  ("GAD931", "Volvo", "White", 1989, 100),
+  ("BBB123", "Peugot", "Silver", 1995, 150),
+  ("GAF413", "Nissan", "Green", 1993, 100),
+  ("NDA911", "General Motors", "Blue", 2014, 250),
+  ("SEC555", "Tesla", "Black", 2018, 250);
 
 INSERT INTO `Allowed Colors` (Colors)
 VALUES
@@ -96,5 +92,3 @@ ALTER TABLE Cars DROP
 COLUMN `Rented from`;
 
 ALTER TABLE Cars DROP FOREIGN KEY Cars_ibfk_2;
-
-ALTER TABLE Customers MODIFY COLUMN `Personal number` BIGINT;

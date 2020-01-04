@@ -1,7 +1,12 @@
-bigint for personnummer
+XXXXX bigint for personnummer XXXX
 month/day regExp
+kontrollsiffror regExp
+
 add / remove customer next to each customer on "Kunder" view.
 
 add car
+    -Dropdowns XXXX
+    -regExp
+    -get Data back to sql
 
 link history-checkout-checkin

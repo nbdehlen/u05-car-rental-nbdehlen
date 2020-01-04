@@ -1,0 +1,37 @@
+{% include '/Partials/top.html' %}
+{% include '/Partials/menu.html' %}
+
+<h1> Lägg till bil </h1>
+   <form method="post" name="addCar" action="/CarAdd" onsubmit="return addCar();">
+   <label for="Registration"> Regnummer: </label>
+  <input type="text" id="Registration" name="Registration" placeholder="" required> <br>
+
+
+  <label for="make"> Maker: </label>
+  <select id="make" name="Make" required> 
+
+    {% for getMaker in getMakers %}
+    <option value="{{ getMaker.Makers }}"> {{ getMaker.Makers }} </option>
+    {% endfor %} 
+
+    </select> <br>
+  <label for="color"> Color: </label>
+ <select id="color" name="Color" required> 
+
+    {% for getColor in getColors %}
+    <option value="{{ getColor.Colors }}"> {{ getColor.Colors }} </option>
+    {% endfor %} 
+
+</select> <br>
+  <label for="year"> Årsmodell: </label>
+  <input type="number" id="year" name="Year" required> <br>
+
+  <label for="price"> Dygnshyra: </label>
+  <input type="number" id="price" name="Price" required> <br>
+
+
+
+   <input type="submit" value="Submit">
+    </form>
+
+{% include '/Partials/bottom.html' %}

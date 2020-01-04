@@ -44,6 +44,7 @@ class UsersController extends Model {
     public function getUser($twig) {
         $personArray = $this->getAll();
         $map = ["personArray" => $personArray];
+        var_dump($map);
         return $twig->loadTemplate("usersAll.twig")->render($map);
     }
 

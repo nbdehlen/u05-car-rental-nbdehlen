@@ -2,15 +2,6 @@
   namespace Main\Core;
   
   class Model extends Config {
-      //private $personArray;
-      /*
-      public function __construct() {
-        $adam = ["name" => "Adam Bertilsson", "address" => "Åvägen 1", "phone" => "12345"];
-        $bertil = ["name" => "Bertil Ceasarsson", "address" => "Åvägen 2", "phone" => "23456"];
-        $ceasar = ["name" => "Ceasar Davidsson", "address" => "Åvägen 3", "phone" => "34567"];
-        $this->personArray = [$adam, $bertil, $ceasar];
-      }
-      */
 
       public function getAll() {
         $sql = "SELECT * FROM Customers";
@@ -64,8 +55,9 @@
         $results = $stmt->fetchAll();
         return $results;
     }
-//$PersonNumber, $Name, $Address, $PostalAddress, $PhoneNumber
-    protected function setUser($PersonNumber, $Name, $Address, $PostalAddress, $PhoneNumber) {
+
+    protected function setUser($PersonNumber, $Name, $Address, 
+    $PostalAddress, $PhoneNumber) {
         //Prepared statement
         $sql = "INSERT INTO Customers (`Personal number`, `Full name`, Address, 
         `Postal address`, `Phone number`)
@@ -83,6 +75,30 @@
       return $stmt->fetchAll();
     }
 
+    protected function setCar($Registration, $Make, $Color, 
+    $Year, $Price) {
+        //Prepared statement
+        $sql = "INSERT INTO Cars (`Registration`, `Make`, Color, 
+        `Year`, `Price`)
+        VALUES (?,?,?,?,?)";
+        $stmt = $this->connect()->prepare($sql);
+        //execute only takes an array so we put one in there, thats all.
+        $stmt->execute([$Registration, $Make, $Color, $Year, 
+        $Price]);
+    }
 
+    protected function getColors(){
+      $sql = "SELECT * FROM `Allowed Colors`";
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute();
+      return $stmt->fetchAll();
+    }
+
+    protected function getMakers(){
+      $sql = "SELECT * FROM `Allowed Makers`";
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute();
+      return $stmt->fetchAll();
+    }
 
   }

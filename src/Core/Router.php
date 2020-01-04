@@ -25,10 +25,9 @@
           return $htmlCode;
         }
 
-        else if ($path == "/carsAdd") {
+        else if ($path == "/CarAdd") {
           $controller = new CarsController();
-          $htmlCode = $controller->getCarsCtrl($twig);
-          return $htmlCode;
+          return $controller->carAdd($twig);
         }
 
         else if ($path == "/inputIndex") {

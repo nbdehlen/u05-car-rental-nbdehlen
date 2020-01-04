@@ -20,4 +20,3 @@ function addCustomerCtrl() {
     alert("Telefonnumret måste börja med en nolla och innehålla exakt 10 nummer");
     return false;
 }
-

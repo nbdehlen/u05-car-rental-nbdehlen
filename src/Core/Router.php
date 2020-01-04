@@ -25,6 +25,11 @@
           return $htmlCode;
         }
 
+        else if ($path == "/carsAdd") {
+          $controller = new CarsController();
+          $htmlCode = $controller->getCarsCtrl($twig);
+          return $htmlCode;
+        }
 
         else if ($path == "/inputIndex") {
           $controller = new InputController();
@@ -36,10 +41,12 @@
           $lastIndex = $form["lastIndex"];
           return $controller->listIndex($twig, $firstIndex, $lastIndex);
         }
-       /* else if ($path == "/") {
-          $controller = new MainController();
-          return $controller->mainMenu($twig);
-        }*/
+        else if ($path == "/userAdd") {
+          $controller = new UsersController();
+          return $controller->userAdd($twig);
+          /*, $PersonNumber, $Name, $Address, $PostalAddress, 
+          $PhoneNumber);*/
+        }
         else if ($path == "/" || $path == "/usersAll") {
           $controller = new UsersController();
           $htmlCode = $controller->getUser($twig);

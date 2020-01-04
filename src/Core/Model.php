@@ -64,12 +64,11 @@
         $results = $stmt->fetchAll();
         return $results;
     }
-
-    protected function setUser($PersonNumber, $Name, $Address, $PostalAddress, 
-    $PhoneNumber) {
+//$PersonNumber, $Name, $Address, $PostalAddress, $PhoneNumber
+    protected function setUser($PersonNumber, $Name, $Address, $PostalAddress, $PhoneNumber) {
         //Prepared statement
         $sql = "INSERT INTO Customers (`Personal number`, `Full name`, Address, 
-        Postal address, `Phone number`)
+        `Postal address`, `Phone number`)
         VALUES (?,?,?,?,?)";
         $stmt = $this->connect()->prepare($sql);
         //execute only takes an array so we put one in there, thats all.

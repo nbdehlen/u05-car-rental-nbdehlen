@@ -45,17 +45,6 @@
         }
       }*/
 
-      protected function getUser($name) {
-        //Prepared statement
-        $sql = "SELECT * FROM Customers WHERE Name = ?";
-        $stmt = $this->connect()->prepare($sql);
-        //execute only takes an array so we put one in there, thats all.
-        $stmt->execute([$name]);
-
-        $results = $stmt->fetchAll();
-        return $results;
-    }
-
     protected function setUser($PersonNumber, $Name, $Address, 
     $PostalAddress, $PhoneNumber) {
         //Prepared statement
@@ -100,5 +89,28 @@
       $stmt->execute();
       return $stmt->fetchAll();
     }
+
+    protected function getUser($name) {
+      //Prepared statement
+      $sql = "SELECT * FROM Customers WHERE Name = ?";
+      $stmt = $this->connect()->prepare($sql);
+      //execute only takes an array so we put one in there, thats all.
+      $stmt->execute([$name]);
+
+      return $stmt->fetchAll();
+  }
+
+  protected function getCheckOut() {
+    //Prepared statement
+    $sql1 = "SELECT `Personal number` FROM Customers";
+    $sql2 = "SELECT `Registration`, `Color`, `Make` FROM Cars WHERE
+    (`Rented from` IS NULL OR `Rented from` = `Free`)";
+    $sql = [$sql1, $sql2];
+    $stmt = $this->connect()->prepare($sql);
+    //execute only takes an array so we put one in there, thats all.
+    $stmt->execute([]);
+    var_dump($sql);
+    return $stmt->fetchAll();
+}
 
   }

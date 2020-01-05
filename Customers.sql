@@ -15,8 +15,7 @@ CREATE TABLE Cars (
   `Make` VARCHAR(20) NOT NULL,
   `Color` VARCHAR(20) NOT NULL,
   `Year` INTEGER(4) UNSIGNED NOT NULL,
-  `Price` INTEGER UNSIGNED NOT NULL,
-  `Rented by` VARCHAR(50),
+  `Price` FLOAT UNSIGNED NOT NULL,
   PRIMARY KEY(`Registration`),
   `Personal number` BIGINT,
   FOREIGN KEY (`Personal number`) REFERENCES Customers(`Personal number`));
@@ -30,10 +29,12 @@ CREATE TABLE `Allowed Makers` (
 CREATE TABLE `History` (
   `Registration` VARCHAR(6) NOT NULL,
   `Personal number` BIGINT,
-  `Rented from` VARCHAR(50) DEFAULT "Free",
-  `Rented until` VARCHAR(50) NOT NULL,
-  `Cost` INTEGER NOT NULL,
-  PRIMARY KEY (`Rented from`),
+  `Rented by` VARCHAR(50) DEFAULT "Free",
+  `Rented from` DATETIME DEFAULT NULL,
+  `Rented until` DATETIME DEFAULT NULL,
+  `Days` INT DEFAULT NULL,
+  `Cost` FLOAT NOT NULL,
+  PRIMARY KEY (`Rented by`),
   FOREIGN KEY (`Registration`) REFERENCES Cars(`Registration`),
   FOREIGN KEY (`Personal number`) REFERENCES Customers(`Personal number`));
   

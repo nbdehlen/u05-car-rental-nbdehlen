@@ -37,7 +37,7 @@ class UsersController extends Model {
         //return $twig->loadTemplate("UserAdd.twig")->render($form);
     }
 
-    public function getUser($twig) {
+    public function getUser($twig) { //should rename this
         $personArray = $this->getAll();
         $map = ["personArray" => $personArray];
         return $twig->loadTemplate("usersAll.twig")->render($map);

@@ -35,4 +35,9 @@ class CarsController extends Model {
         $this->setCar($Registration, $Make, $Color, $Year, $Price);
     }
 
+    public function checkOut() {
+        $this->getCheckOut();
+
+    }
+    
 }

@@ -1,0 +1,23 @@
+{% include '/Partials/top.html' %}
+{% include '/Partials/menu.html' %}
+
+<h1> Checka in bil <h2>
+<form method="post" name="CheckIn" action="/CheckIn" onsubmit="return confirm('Are you sure you want to return this car?');">
+
+
+  <label for="reg"> Bil: </label>
+  <select id="reg" name="reg" required> 
+
+    {% for value in getReg %}
+    <option value="{{ value.Registration }}">
+    {{ value.Registration }} {{ value.Color }} {{ value.Make }} </option>
+    {% endfor %} 
+
+    </select>
+
+    <br>
+    <input type="submit" value="Submit">
+    </form>
+
+
+{% include '/Partials/bottom.html' %}

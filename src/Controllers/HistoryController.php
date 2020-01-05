@@ -36,17 +36,41 @@ class HistoryController extends Model {
         $this->setCheckOutTime($rentedBy, $reg);
     }
 
+    public function checkIn($twig){
+        $getRegRented = $this->getRegRented();
+        $map = ["getRegRented" => $getRegRented];
+
+        if (isset($_POST['reg'])) {
+            echo "Checking in!";
+            $this->createHistory();
+            return $twig->loadTemplate("CheckIn.twig")->render($map);
+        }
+        else {
+            echo "NOT checking in!";
+            return $twig->loadTemplate("CheckIn.twig")->render($map);
+        }
+    }
+
+    public function createHistory() {
+        $pr = $_POST[''];
+        $reg = $_POST[''];
+        $rentedFrom = $_POST[''];
+        $rentedUntil = $_POST[''];
+        $this->setRegReturned($pr, $reg, $rentedFrom,
+            $rentedUntil, );
+    }
+
 }
 
 /*
-Checkout:
-1. Send in dropdowns XXX
+Checkin:
 
-2. Change value in Cars `Rented from` to a js date
-    Change value in cars `Rented by` to Personnummer selected
+1. get dropdown list: bilar som är uthyrda XXX
+2. set:
+    Regnummer från Cars matchande personnummer Rentedby
+    Personnummer från Cars matchande 
 
-3. Set Registration
-
-
-
+    Antal påbörjade dygn bilen var uthyrd
+    cost (days*price)
+    JS: totala kostnaden
 */

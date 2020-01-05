@@ -56,6 +56,10 @@
           $controller = new HistoryController();
           return $controller->checkOut($twig);
         }
+        else if ($path == "/CheckIn") {
+          $controller = new HistoryController();
+          return $controller->checkIn($twig);
+        }
         else {
           return "Router Error!";
         }

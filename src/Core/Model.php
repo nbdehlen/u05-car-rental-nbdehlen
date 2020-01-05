@@ -113,4 +113,16 @@
     return $stmt->fetchAll();
 }
 
+/*
+
+ public function transfer($fromAccountNumber) {
+    $customersQuery = <<< __HTML
+       SELECT CONCAT(customer.customerNumber, ',',
+       customer.customerName, ',', account.accountNumber)
+       FROM Customers customer JOIN Accounts account
+       ON ((customer.customerNumber = account.customerNumber)
+       AND (accountNumber != :fromAccountNumber));
+__HTML;
+
+*/
   }

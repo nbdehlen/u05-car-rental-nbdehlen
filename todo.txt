@@ -5,6 +5,7 @@ XXX add car XXX
        XXX heltal inom intervallet 1900 till 2019 XXX
        XXX Registreringsnumret skall vara svenskt XXX
    XXXX get Data back to sql XXXX
+XXXX ÅÄÖ XXXX
 
 month/day regExp
 kontrollsiffror personnummer regExp

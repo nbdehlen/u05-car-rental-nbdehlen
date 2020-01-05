@@ -102,13 +102,13 @@
 
   protected function getCheckOut() {
     //Prepared statement
-    $sql1 = "SELECT `Personal number` FROM Customers";
-    $sql2 = "SELECT `Registration`, `Color`, `Make` FROM Cars WHERE
-    (`Rented from` IS NULL OR `Rented from` = `Free`)";
-    $sql = [$sql1, $sql2];
+    //$sql1 = "SELECT `Personal number` FROM Customers";
+    $sql = "SELECT `Registration`, `Color`, `Make` FROM Cars WHERE
+    (History.`Rented from` IS NULL OR History.`Rented from` = `Free`)";
+    //$sql = [$sql1, $sql2];
     $stmt = $this->connect()->prepare($sql);
     //execute only takes an array so we put one in there, thats all.
-    $stmt->execute([]);
+    $stmt->execute();
     var_dump($sql);
     return $stmt->fetchAll();
 }

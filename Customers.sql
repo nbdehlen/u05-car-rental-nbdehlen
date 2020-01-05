@@ -3,11 +3,11 @@ CREATE DATABASE car_rental;
 USE car_rental;
 
 CREATE TABLE `Customers` (
-  `Personal number` BIGINT,
+  `Personal number` VARCHAR(10),
   `Full name` VARCHAR(100) NOT NULL,
   `Address` VARCHAR(256) NOT NULL,
   `Postal address` VARCHAR(256) NOT NULL,
-  `Phone number` INTEGER NOT NULL,
+  `Phone number` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`Personal Number`));
 
 CREATE TABLE Cars (
@@ -16,8 +16,10 @@ CREATE TABLE Cars (
   `Color` VARCHAR(20) NOT NULL,
   `Year` INTEGER(4) UNSIGNED NOT NULL,
   `Price` FLOAT UNSIGNED NOT NULL,
+  `Rented by` VARCHAR(10) DEFAULT "",
+  `Rented from` VARCHAR(20) DEFAULT "Free",
   PRIMARY KEY(`Registration`),
-  `Personal number` BIGINT,
+  `Personal number` VARCHAR(10),
   FOREIGN KEY (`Personal number`) REFERENCES Customers(`Personal number`));
 
 CREATE TABLE `Allowed Colors` (
@@ -28,13 +30,11 @@ CREATE TABLE `Allowed Makers` (
   
 CREATE TABLE `History` (
   `Registration` VARCHAR(6) NOT NULL,
-  `Personal number` BIGINT,
-  `Rented by` VARCHAR(50) DEFAULT "Free",
+  `Personal number` VARCHAR(10),
   `Rented from` DATETIME DEFAULT NULL,
   `Rented until` DATETIME DEFAULT NULL,
   `Days` INT DEFAULT NULL,
   `Cost` FLOAT NOT NULL,
-  PRIMARY KEY (`Rented by`),
   FOREIGN KEY (`Registration`) REFERENCES Cars(`Registration`),
   FOREIGN KEY (`Personal number`) REFERENCES Customers(`Personal number`));
   
@@ -93,3 +93,6 @@ ALTER TABLE Cars DROP
 COLUMN `Rented from`;
 
 ALTER TABLE Cars DROP FOREIGN KEY Cars_ibfk_2;
+
+SELECT `Registration`, `Color`, `Make` FROM Cars WHERE
+    (History.`Rented from` IS NULL OR History.`Rented from` = `Free`);

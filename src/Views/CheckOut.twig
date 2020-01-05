@@ -1,0 +1,27 @@
+{% include '/Partials/top.html' %}
+{% include '/Partials/menu.html' %}
+
+<form method="post" name="addCar" action="/CarAdd" onsubmit="return addCarCtrl();">
+
+  <label for="reg"> Maker: </label>
+  <select id="reg" name="reg" required> 
+
+    {% for reg in getMakers %}
+    <option value="{{ getMaker.Makers }}"> {{ getMaker.Makers }} </option>
+    {% endfor %} 
+
+    </select>
+
+    <select id="reg" name="reg" required> 
+
+    {% for reg in getMakers %}
+    <option value="{{ getMaker.Makers }}"> {{ getMaker.Makers }} </option>
+    {% endfor %} 
+
+    </select>
+    </form>
+
+
+
+
+{% include '/Partials/bottom.html' %}

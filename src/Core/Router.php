@@ -6,6 +6,7 @@
   use Main\Controllers\MainController;  
   use Main\Controllers\UsersController; 
   use Main\Controllers\CarsController; 
+  use Main\Controllers\HistoryController; 
   
   class Router {
     public function route($request, $twig) {
@@ -50,7 +51,12 @@
           $controller = new UsersController();
           $htmlCode = $controller->getUser($twig);
           return $htmlCode;
-        } else {
+        }
+        else if ($path == "/CheckOut") {
+          $controller = new HistoryController();
+          return $controller->checkOut($twig);
+        }
+        else {
           return "Router Error!";
         }
     }

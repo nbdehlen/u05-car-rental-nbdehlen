@@ -9,8 +9,11 @@ XXXX ÅÄÖ XXXX
 
 month/day regExp
 kontrollsiffror personnummer regExp
-Registreringsnumret ska exkludera fula ord, siffror osv
+Registreringsnumret ska exkludera fula ord, siffror i text osv
 
 add / remove customer next to each customer on "Kunder" view.
 
 link history-checkout-checkin
+
+Grouping queries 
+

@@ -1,27 +1,31 @@
 {% include '/Partials/top.html' %}
 {% include '/Partials/menu.html' %}
 
-<form method="post" name="addCar" action="/CarAdd" onsubmit="return addCarCtrl();">
+<h1> Checka ut bil <h2>
+<form method="post" name="CheckOut" action="/CheckOut" onsubmit="return confirm('Are you sure you want to rent this car?');">
 
-  <label for="reg"> Maker: </label>
-  <select id="reg" name="reg" required> 
 
-    {% for reg in getMakers %}
-    <option value="{{ getMaker.Makers }}"> {{ getMaker.Makers }} </option>
+  <label for="pr"> Kund: </label>
+  <select id="pr" name="pr" required> 
+
+    {% for value in getPr %}
+    <option value="{{ value["Personal number"] }}">
+     {{ value["Personal number"] }} </option>
     {% endfor %} 
 
     </select>
-
+  <br>
+    <label for="reg"> Bil: </label>
     <select id="reg" name="reg" required> 
 
-    {% for reg in getMakers %}
-    <option value="{{ getMaker.Makers }}"> {{ getMaker.Makers }} </option>
+    {% for value in getReg %}
+    <option value="{{ value.Registration }}">
+    {{ value.Registration }} {{ value.Color }} {{ value.Make }} </option>
     {% endfor %} 
 
     </select>
+    <br>
+    <input type="submit" value="Submit">
     </form>
-
-
-
 
 {% include '/Partials/bottom.html' %}

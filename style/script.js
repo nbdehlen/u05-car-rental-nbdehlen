@@ -42,3 +42,9 @@ function addCarCtrl() {
     alert("Felaktigt registreringsnummer");
     return false;
 }
+
+/*function checkOut() {
+    let currentTime = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    //time function to match checkOut date format
+    return currentTime;
+}*/

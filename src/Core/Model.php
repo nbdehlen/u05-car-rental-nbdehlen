@@ -100,19 +100,39 @@
       return $stmt->fetchAll();
   }
 
-  protected function getCheckOut() {
+  protected function getRegFree() {
     //Prepared statement
-    //$sql1 = "SELECT `Personal number` FROM Customers";
     $sql = "SELECT `Registration`, `Color`, `Make` FROM Cars WHERE
-    (History.`Rented from` IS NULL OR History.`Rented from` = `Free`)";
+    `Rented by` = 'Free'";
     //$sql = [$sql1, $sql2];
     $stmt = $this->connect()->prepare($sql);
     //execute only takes an array so we put one in there, thats all.
     $stmt->execute();
-    var_dump($sql);
+    //var_dump($sql);
     return $stmt->fetchAll();
 }
 
+
+protected function getPr() {
+  //Prepared statement
+  $sql = "SELECT `Personal number` FROM Customers";
+  $stmt = $this->connect()->prepare($sql);
+  //execute only takes an array so we put one in there, thats all.
+  $stmt->execute();
+  //var_dump($sql);
+  return $stmt->fetchAll();
+}
+
+protected function setCheckOutTime($rentedBy, $reg) {
+    //Prepared statement
+    $sql = "UPDATE Cars SET 
+    `Rented by` = ?, 
+    `Rented from` = NOW() WHERE `Registration` = ?";
+    //VALUES (?,?)";
+    $stmt = $this->connect()->prepare($sql);
+    //execute only takes an array so we put one in there, thats all.
+    $stmt->execute([$rentedBy, $reg]);
+}
 /*
 
  public function transfer($fromAccountNumber) {

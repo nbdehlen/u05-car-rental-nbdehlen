@@ -16,8 +16,8 @@ CREATE TABLE Cars (
   `Color` VARCHAR(20) NOT NULL,
   `Year` INTEGER(4) UNSIGNED NOT NULL,
   `Price` FLOAT UNSIGNED NOT NULL,
-  `Rented by` VARCHAR(10) DEFAULT "",
-  `Rented from` VARCHAR(20) DEFAULT "Free",
+  `Rented by` VARCHAR(10) DEFAULT "Free",
+  `Rented from` DATETIME DEFAULT NULL,
   PRIMARY KEY(`Registration`),
   `Personal number` VARCHAR(10),
   FOREIGN KEY (`Personal number`) REFERENCES Customers(`Personal number`));

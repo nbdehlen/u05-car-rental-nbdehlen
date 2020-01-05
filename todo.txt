@@ -1,12 +1,15 @@
 XXXXX bigint for personnummer XXXX
 month/day regExp
-kontrollsiffror regExp
+kontrollsiffror personnummer regExp
+Registreringsnumret ska exkludera fula ord, siffror osv
 
 add / remove customer next to each customer on "Kunder" view.
 
 add car
-    -Dropdowns XXXX
-    -regExp
-    -get Data back to sql
+     XXXX -Dropdowns XXXX
+    XXXX -regExp XXXX
+       XXX heltal inom intervallet 1900 till 2019 XXX
+       XXX Registreringsnumret skall vara svenskt XXX
+   XXXX get Data back to sql XXXX
 
 link history-checkout-checkin

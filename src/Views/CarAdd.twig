@@ -2,7 +2,7 @@
 {% include '/Partials/menu.html' %}
 
 <h1> Lägg till bil </h1>
-   <form method="post" name="addCar" action="/CarAdd" onsubmit="return addCar();">
+   <form method="post" name="addCar" action="/CarAdd" onsubmit="return addCarCtrl();">
    <label for="Registration"> Regnummer: </label>
   <input type="text" id="Registration" name="Registration" placeholder="" required> <br>
 
@@ -28,8 +28,6 @@
 
   <label for="price"> Dygnshyra: </label>
   <input type="number" id="price" name="Price" required> <br>
-
-
 
    <input type="submit" value="Submit">
     </form>

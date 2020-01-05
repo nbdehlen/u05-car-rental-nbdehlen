@@ -12,13 +12,9 @@ class UsersController extends Model {
     //Second reason is if we have multiple tables or classes this is an easier way
     public function userAdd($twig) {
         if (isset($_POST['PersonNumber'])) {
-            echo "CreateUser osv";
-            var_dump($_POST);
             $this->createUser();
             return $twig->loadTemplate("UserAdd.twig")->render([]);
         } else {
-            echo "yoyo userAdd";
-            var_dump($_POST);
             return $twig->loadTemplate("UserAdd.twig")->render([]);
         }
     }
@@ -44,7 +40,6 @@ class UsersController extends Model {
     public function getUser($twig) {
         $personArray = $this->getAll();
         $map = ["personArray" => $personArray];
-        var_dump($map);
         return $twig->loadTemplate("usersAll.twig")->render($map);
     }
 

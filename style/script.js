@@ -20,3 +20,25 @@ function addCustomerCtrl() {
     alert("Telefonnumret måste börja med en nolla och innehålla exakt 10 nummer");
     return false;
 }
+
+function addCarCtrl() {
+    const reg = document.querySelector("#Registration").value;
+    const year = Number(document.querySelector("#year").value);
+
+    const regReq =/[A-Za-z]{3}[0-9]{3}/g;
+    const regMatch = reg.match(regReq);
+
+    const yearReq = year >= 1900 && year <= 2020;
+
+    if (regMatch) {
+        if (yearReq) {
+            alert("Bil tillagd i bilregistret");
+            return true;
+        } else {
+            alert("Tillverkaråret måste vara mellan år 1900 och 2020");
+            return false;
+        }
+    }
+    alert("Felaktigt registreringsnummer");
+    return false;
+}

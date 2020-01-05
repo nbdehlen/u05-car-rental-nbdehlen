@@ -14,10 +14,9 @@ class CarsController extends Model {
         $Colors = $this->getColors();
         $Makers = $this->getMakers();
         $map = ["getColors" => $Colors, "getMakers" => $Makers];
-        var_dump($map);
+
         if (isset($_POST['Registration'])) {
             echo "CreateUser osv";
-            var_dump($_POST);
             $this->createCar();
             return $twig->loadTemplate("CarAdd.twig")->render($map);
         } else {
@@ -33,7 +32,7 @@ class CarsController extends Model {
         $Year = $_POST['Year'];
         $Price = $_POST['Price'];
 
-        $this->setUser($Registration, $Make, $Color, $Year, $Price);
+        $this->setCar($Registration, $Make, $Color, $Year, $Price);
     }
 
 }

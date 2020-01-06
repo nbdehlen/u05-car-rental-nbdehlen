@@ -38,10 +38,12 @@ class CarsController extends Model {
     //Get selected Car for Edit
     public function getCarCtrl($twig) {
         $reg = explode("/", $_SERVER['REQUEST_URI']);
-        var_dump($reg[3]);
-        var_dump($reg[4]);
+        //var_dump($reg);
         $Colors = $this->getColors();
         $Makers = $this->getMakers();
+        //$regplate = $reg[2];
+        //$regFunc = $this->getReg($regplate);
+        //var_dump($regFunc);
         $map = [
         "reg" => $reg[2],
         "preMake" => $reg[3],
@@ -51,10 +53,25 @@ class CarsController extends Model {
         //$carArray = getCarEdit($reg);
         //$map =[ "carArray" => $carArray];
         //var_dump($_SERVER['REQUEST_URI']);
-    return $twig->loadTemplate("CarEdit.twig")->render($map);
-    }
+
+        if (isset($_POST['Year'])) {
+            $this->editCar();
+            //var_dump($_POST);
+            return $twig->loadTemplate("CarEdit.twig")->render($map);
+        } else {
+            return $twig->loadTemplate("CarEdit.twig")->render($map);
+        }
     
-    public function editCar($reg) {
-        
+    }
+    //get post values to send to model
+    public function editCar() {
+        //$make = str_replace('%',' ',$_POST['Make']);
+        $reg = $_POST['Registration'];
+        $make = $_POST['Make'];
+        $color = $_POST['Color'];
+        $year = $_POST['Year'];
+        $price = $_POST['Price'];
+
+        $this->setCarEdit($make, $color, $year, $price, $reg);
     }
 }

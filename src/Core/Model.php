@@ -131,7 +131,7 @@ protected function getRegRented() {
   return $stmt->fetchAll();
 }
 
-//Set history for cars rented
+//Set history for cars rented NOT USED
 protected function setRegReturned($reg) {
   $sql = "INSERT INTO History (`Personal number`, `Registration`, `Cost`,
   `Rented from`, `Rented until`, `Days`)
@@ -142,12 +142,25 @@ protected function setRegReturned($reg) {
 
 }
 
+    //Get matching reg plate
+  /*  protected function getReg($regplate){
+      $sql = "SELECT `Registration` FROM `Cars`
+      WHERE `Registration` = ?";
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$regplate]);
+      return $stmt->fetchAll();
+    }*/
+
 //Set Car to edit
-protected function setCarEdit($reg) {
-    $sql = "SELECT * FROM Cars WHERE `Registration` = ?";
+protected function setCarEdit($make, $color, $year, $price, $reg) {
+    $sql = "UPDATE Cars SET
+    `Make` = ?,
+    `Color` = ?,
+    `Year` = ?,
+    `Price` = ?
+    WHERE `Registration` = ?";
     $stmt = $this->connect()->prepare($sql);
-    $stmt->execute();
-    return $stmt->fetchAll();
+    $stmt->execute([$make, $color, $year, $price, $reg]);
 }
 
 /*

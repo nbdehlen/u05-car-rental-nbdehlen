@@ -2,9 +2,9 @@
 {% include '/Partials/menu.html' %}
 
 <h1> Editera bil </h1>
-   <form method="post" name="editCar" action="/CarEdit" onsubmit="return addCarCtrl();">
-   <td>Regnummer: <p id="Registration" name="Registration"> 
-   {{ reg }} </p> </td>
+   <form method="post" name="editCar" action="/CarEdit/{{ value.Registration }}/{{ getMaker.Makers }}/{{ getColor.Colors }}" onsubmit="return addCarCtrl();">
+   <td>Regnummer: <input id="Registration" readonly name="Registration" value="{{ reg }}"> 
+    </td> <br>
 
   <label for="make"> Maker: </label>
   <select id="make" name="Make" required> 

@@ -62,6 +62,15 @@ class HistoryController extends Model {
             $rentedUntil, );
     }*/
 
+    public function displayHistory($twig) {
+        $getHistory = $this->getHistory();
+        $count = $this->getConvertions();
+        $map = ["getHistory" => $getHistory,
+                "getCount" => $count];
+        var_dump($map);
+    return $twig->loadTemplate("HistoryAll.twig")->render($map);
+    }
+
 }
 
 /*

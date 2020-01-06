@@ -4,7 +4,7 @@
 
   class Model extends Config {
 
-      public function getAll() {
+      protected function getAll() {
         $sql = "SELECT * FROM Customers";
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute();
@@ -212,7 +212,35 @@ SQL;
 __HTML;
 
 */
+  protected function getHistory() {
+      $sql = "SELECT * FROM History";
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute();
+      return $stmt->fetchAll();
+  }
 
 
+  //convert dates into days and total cost
+  protected function getConvertions() {
+    //var_export or serialize
+    $sqlCount = "SELECT COUNT(*) FROM History";
+
+    $stmt = $this->connect()->prepare($sqlCount);
+    $stmt->execute();
+    return $stmt->fetchAll();
+     
+  }
 
   }
+
+  /*
+SQL: Count number of rows in history,
+SQL: Get Reg and Price from Cars table
+SQL: Get Days from History table
+for each row:
+        get days in an array,
+        get cost in an array
+End for each
+
+Sum of all cost
+  */

@@ -11,14 +11,7 @@ XXXX ÅÄÖ XXXX
 
 XXX add / remove customer next to each customer on "Kunder" view. XXX
 
-
-Edit, Remove customers
-Fully delete car/customer from history aswell on delete buttons
-Create history table with query
-
-month/day regExp
-kontrollsiffror personnummer regExp
-Registreringsnumret ska exkludera fula ord, siffror i text osv
+XXX Create history table with query XXX
 
 Check in:
          XXX   get $reg from function XXX
@@ -28,6 +21,19 @@ Check in:
         XXX Update Cars based on matching $reg XXXX
         XXX remove Cars rented from and Rented by to "Free" XXX
 
-            Calculate days
-            Calculate cost
 
+Fetch SQL to Calculate days, Calculate cost
+   render on history tab together with fetch from History
+
+History view
+
+Edit/Remove Customer 
+
+Fully delete car/customer from history aswell on delete buttons
+
+kontrollsiffror personnummer regExp
+Registreringsnumret ska exkludera fula ord, siffror i text osv
+
+Cleanup code w language and commenting
+
+Add to binero

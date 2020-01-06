@@ -68,7 +68,10 @@
           $controller = new CarsController();
           return $controller->removeCar($twig);
         }
-
+        else if ($path == "/HistoryAll") {
+          $controller = new HistoryController();
+          return $controller->displayHistory($twig);
+        }
         else {
           return "Router Error!";
         }

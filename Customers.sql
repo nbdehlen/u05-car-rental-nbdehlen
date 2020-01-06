@@ -110,4 +110,28 @@ INSERT INTO History (`Personal number`, `Registration`, `Cost`,
 INSERT INTO History (`Personal number`, `Registration`,
 `Rented from`)
 SELECT `Rented by`, Registration, `Rented from`
-FROM Cars WHERE `Registration` = "ABC123";
+FROM Cars WHERE `Registration` = 'ABC123';
+
+UPDATE History SET 
+History.`Personal number` = `Rented by`,
+History.`Registration` = `Registration`,
+History.`Rented from` = `Rented from`,
+History.`Rented until` = NOW()
+FROM History INNER JOIN Cars
+WHERE `Registration` = "ABC123";
+
+SELECT History SET 
+History.`Personal number` = `Rented by`,
+History.`Registration` = `Registration`,
+History.`Rented from` = `Rented from`,
+History.`Rented until` = NOW()
+FROM History INNER JOIN Cars
+WHERE `Registration` = "ABC123";
+
+ALTER TABLE History
+ADD `Rented until` DATETIME DEFAULT NOW();
+
+UPDATE Cars SET 
+`Rented by` ='Free', 
+`Rented from`= NULL
+WHERE `Registration` = 'ABC123';

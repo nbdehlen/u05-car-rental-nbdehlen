@@ -1,6 +1,7 @@
 <?php
   namespace Main\Core;
-  
+  use PDOException;
+
   class Model extends Config {
 
       public function getAll() {
@@ -131,26 +132,6 @@ protected function getRegRented() {
   return $stmt->fetchAll();
 }
 
-//Set history for cars rented NOT USED
-protected function setRegReturned($reg) {
-  $sql = "INSERT INTO History (`Personal number`, `Registration`, `Cost`,
-  `Rented from`, `Rented until`, `Days`)
-  VALUES (?,?,?,?,?,?)";
-  $stmt = $this->connect()->prepare($sql);
-  //$stmt->execute([$pr, $reg, $rentedFrom,
-  //$rentedUntil]);
-
-}
-
-    //Get matching reg plate
-  /*  protected function getReg($regplate){
-      $sql = "SELECT `Registration` FROM `Cars`
-      WHERE `Registration` = ?";
-      $stmt = $this->connect()->prepare($sql);
-      $stmt->execute([$regplate]);
-      return $stmt->fetchAll();
-    }*/
-
 //Set Car to edit
 protected function setCarEdit($make, $color, $year, $price, $reg) {
     $sql = "UPDATE Cars SET
@@ -169,18 +150,46 @@ protected function setCarRemove($reg) {
   $stmt = $this->connect()->prepare($sql);
   $stmt->execute([$reg]);
 }
+
+  //Set history for cars rented
+  protected function setRegReturned($reg)
+{
+    try {
+      /*$sql = "INSERT INTO History (`Personal number`, `Registration`, `Cost`,
+  `Rented from`, `Rented until`, `Days`)
+  VALUES (?,?,?,?,?,?)";*/
+      $sql = "INSERT INTO History (`Personal number`, `Registration`,
+      `Rented from`)
+      SELECT `Rented by`, Registration, `Rented from`
+      FROM Cars WHERE `Registration` = ?";
+
+      $stmt = $this->connect()->prepare($sql);
+      $stmt->execute([$reg]);
+
+      $sql2 = "UPDATE Cars SET 
+      `Rented by` ='Free', 
+      `Rented from`= NULL
+      WHERE `Registration` = ?";
+
+      $stmt2 = $this->connect()->prepare($sql2);
+      $stmt2->execute([$reg]);
+
+    } catch (PDOException $e) {
+      echo "Error : " . $e->getMessage();
+    }
+  }
 /*
 actualFunction:
             get $reg from function XXX
 SQLcalcs based on row matching $reg actualFunction :
-        get "person number" from Cars(rented by)
-        get "rented from" from Cars(registration matching $reg)
-        Update Cars based on matching $reg
+       XXXX get "person number" from Cars(rented by)XXXX
+       XXX get "rented from" from Cars(registration matching $reg) XXX
+        XXX Update Cars based on matching $reg XXXX
 ownFunction:  
             Calculate days here
             Calculate cost here (price*days)
 ownSQL:
-          Update "Rented until" with NOW();
+           XXXUpdate "Rented until" with NOW(); XXX
 */
 
 /*
@@ -203,4 +212,7 @@ SQL;
 __HTML;
 
 */
+
+
+
   }

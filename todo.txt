@@ -12,11 +12,22 @@ XXXX ÅÄÖ XXXX
 XXX add / remove customer next to each customer on "Kunder" view. XXX
 
 
-
+Edit, Remove customers
 Fully delete car/customer from history aswell on delete buttons
 Create history table with query
 
 month/day regExp
 kontrollsiffror personnummer regExp
 Registreringsnumret ska exkludera fula ord, siffror i text osv
+
+Check in:
+         XXX   get $reg from function XXX
+       XXXX get "person number" from Cars(rented by)XXXX
+       XXX get "rented from" from Cars(registration matching $reg) XXX
+        XXXUpdate "Rented until" with NOW(); XXX
+        XXX Update Cars based on matching $reg XXXX
+        XXX remove Cars rented from and Rented by to "Free" XXX
+
+            Calculate days
+            Calculate cost
 

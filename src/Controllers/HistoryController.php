@@ -42,8 +42,9 @@ class HistoryController extends Model {
         /*var_dump($map);*/
         if (isset($_POST['reg'])) {
             echo "Checking in!";
-            //$this->createHistory();
             var_dump($_POST);
+            $reg = $_POST['reg'];
+            $this->setRegReturned($reg);
             return $twig->loadTemplate("CheckIn.twig")->render($map);
         }
         else {
@@ -52,14 +53,14 @@ class HistoryController extends Model {
         }
     }
 
-    public function createHistory() {
+    /*public function createHistory() {
         $pr = $_POST[''];
         $reg = $_POST[''];
         $rentedFrom = $_POST[''];
         $rentedUntil = $_POST[''];
         $this->setRegReturned($pr, $reg, $rentedFrom,
             $rentedUntil, );
-    }
+    }*/
 
 }
 

@@ -96,3 +96,18 @@ ALTER TABLE Cars DROP FOREIGN KEY Cars_ibfk_2;
 
 SELECT `Registration`, `Color`, `Make` FROM Cars WHERE
     (History.`Rented from` IS NULL OR History.`Rented from` = `Free`);
+
+
+
+SELECT * FROM Cars WHERE `Registration` = "ABC123"
+
+INSERT INTO History (`Personal number`, `Registration`, `Cost`,
+  `Rented from`, `Rented until`, `Days`)
+  VALUES()
+
+  SELECT * FROM Cars WHERE `Registration` = "ABC123"
+
+INSERT INTO History (`Personal number`, `Registration`,
+`Rented from`)
+SELECT `Rented by`, Registration, `Rented from`
+FROM Cars WHERE `Registration` = "ABC123";

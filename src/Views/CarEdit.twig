@@ -1,0 +1,42 @@
+{% include '/Partials/top.html' %}
+{% include '/Partials/menu.html' %}
+
+<h1> Editera bil </h1>
+   <form method="post" name="editCar" action="/CarEdit" onsubmit="return addCarCtrl();">
+   <td>Regnummer: <p id="Registration" name="Registration"> 
+   {{ reg }} </p> </td>
+
+  <label for="make"> Maker: </label>
+  <select id="make" name="Make" required> 
+
+    {% for getMaker in getMakers %}
+        {% if preMake == getMaker.Makers %}
+    <option selected value="{{ getMaker.Makers }}"> {{ getMaker.Makers }} </option>
+       {% else %}
+       <option value="{{ getMaker.Makers }}"> {{ getMaker.Makers }} </option>
+        {% endif %}
+    {% endfor %} 
+
+    </select> <br>
+  <label for="color"> Color: </label>
+ <select id="color" name="Color" required> 
+
+    {% for getColor in getColors %}
+        {% if preColor == getColor.Colors %}
+    <option selected value="{{ getColor.Colors }}"> {{ getColor.Colors }} </option>
+        {% else %}
+        <option value="{{ getColor.Colors }}"> {{ getColor.Colors }} </option>
+        {% endif %}
+    {% endfor %} 
+
+</select> <br>
+  <label for="year"> Årsmodell: </label>
+  <input type="number" id="year" name="Year" required> <br>
+
+  <label for="price"> Dygnshyra: </label>
+  <input type="number" id="price" name="Price" required> <br>
+
+   <input type="submit" value="Submit">
+    </form>
+
+{% include '/Partials/bottom.html' %}

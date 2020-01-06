@@ -137,14 +137,22 @@ protected function setRegReturned($reg) {
   `Rented from`, `Rented until`, `Days`)
   VALUES (?,?,?,?,?,?)";
   $stmt = $this->connect()->prepare($sql);
-  $stmt->execute([$pr, $reg, $rentedFrom,
-  $rentedUntil]);
+  //$stmt->execute([$pr, $reg, $rentedFrom,
+  //$rentedUntil]);
 
+}
+
+//Set Car to edit
+protected function setCarEdit($reg) {
+    $sql = "SELECT * FROM Cars WHERE `Registration` = ?";
+    $stmt = $this->connect()->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchAll();
 }
 
 /*
 actualFunction:
-            get $reg from function
+            get $reg from function XXX
 SQLcalcs based on row matching $reg actualFunction :
         get "person number" from Cars(rented by)
         get "rented from" from Cars(registration matching $reg)
@@ -156,7 +164,14 @@ ownSQL:
           Update "Rented until" with NOW();
 */
 
-
+/*
+$abg = <<< SQL
+  SELECT * FROM Cars WHERE `Registration` = $reg
+  INSERT INTO History (`Personal number`, `Registration`, `Cost`,
+  `Rented from`, `Rented until`, `Days`)
+  VALUES()
+SQL;
+*/
 /*
 
  public function transfer($fromAccountNumber) {

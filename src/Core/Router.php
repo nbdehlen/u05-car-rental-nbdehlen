@@ -60,6 +60,10 @@
           $controller = new HistoryController();
           return $controller->checkIn($twig);
         }
+        else if (preg_match("/^\/(CarEdit)/", $path)) {
+          $controller = new CarsController();
+          return $controller->getCarCtrl($twig);
+        }
         else {
           return "Router Error!";
         }

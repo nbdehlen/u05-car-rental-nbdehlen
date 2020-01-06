@@ -20,6 +20,13 @@
         <td> {{ value.Price }}</td>
         <td> {{ value['Rented by'] }}</td>
         <td> {{ value['Rented from'] }}</td>
+        <td><form method="post" action="/CarEdit/{{ value.Registration }}/{{ value.Make }}/{{ value.Color }}">
+        <input type="hidden" value="{{ value.Registration }}">
+        <input type="submit" value="Edit">
+        </form></td>
+        <td> <form method="post" action="/CarRemove/{{ value.Registration }}">
+        <input type="submit" value="Remove">
+        </form></td>
   </tr>
   {%  endfor %}
        {#

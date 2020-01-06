@@ -8,7 +8,7 @@
   <label for="reg"> Bil: </label>
   <select id="reg" name="reg" required> 
 
-    {% for value in getReg %}
+    {% for value in getRegRented %}
     <option value="{{ value.Registration }}">
     {{ value.Registration }} {{ value.Color }} {{ value.Make }} </option>
     {% endfor %} 

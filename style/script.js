@@ -32,7 +32,7 @@ function addCarCtrl() {
 
     if (regMatch) {
         if (yearReq) {
-            alert("Bil tillagd i bilregistret");
+            alert("Bil tillagd/ändrad i registret");
             return true;
         } else {
             alert("Tillverkaråret måste vara mellan år 1900 och 2020");

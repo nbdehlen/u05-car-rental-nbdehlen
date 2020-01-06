@@ -24,7 +24,7 @@ class CarsController extends Model {
         }
     }
 
-    public function createCar(/*$twig*/) {
+    public function createCar() {
         echo "accessing createCar function";
         $Registration = $_POST['Registration'];
         $Make = $_POST['Make'];
@@ -33,5 +33,28 @@ class CarsController extends Model {
         $Price = $_POST['Price'];
 
         $this->setCar($Registration, $Make, $Color, $Year, $Price);
+    }
+
+    //Get selected Car for Edit
+    public function getCarCtrl($twig) {
+        $reg = explode("/", $_SERVER['REQUEST_URI']);
+        var_dump($reg[3]);
+        var_dump($reg[4]);
+        $Colors = $this->getColors();
+        $Makers = $this->getMakers();
+        $map = [
+        "reg" => $reg[2],
+        "preMake" => $reg[3],
+        "preColor" => $reg[4],
+        "getColors" => $Colors, 
+        "getMakers" => $Makers];
+        //$carArray = getCarEdit($reg);
+        //$map =[ "carArray" => $carArray];
+        //var_dump($_SERVER['REQUEST_URI']);
+    return $twig->loadTemplate("CarEdit.twig")->render($map);
+    }
+    
+    public function editCar($reg) {
+        
     }
 }

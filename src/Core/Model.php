@@ -1,6 +1,7 @@
 <?php
   namespace Main\Core;
   use PDOException;
+  use DateTime;
 
   class Model extends Config {
 
@@ -222,15 +223,22 @@ __HTML;
 
   //convert dates into days and total cost
   protected function getConvertions() {
-    //var_export or serialize
-    $sqlCount = "SELECT COUNT(*) FROM History";
-
-    $stmt = $this->connect()->prepare($sqlCount);
+    $sqlDates = "SELECT `Rented from`,`Rented until`, `Registration` FROM History";
+    $stmt = $this->connect()->prepare($sqlDates);
     $stmt->execute();
-    return $stmt->fetchAll();
-     
-  }
+    $dates = $stmt->fetchAll();
 
+    for ($i=0; $i< count($dates); $i++) {
+      $interval = strtotime($dates[$i]['Rented until']) - strtotime($dates[$i]['Rented from']);
+      $days[] = ceil($interval/86400);
+      $reg[] = $dates[$i]['Registration'];
+      }
+ 
+      $sqlPrice = "SELECT `Price` FROM Cars 
+      INNER JOIN History `Registration` W
+      WHERE
+      `Registration` ";
+      
   }
 
   /*

@@ -39,7 +39,7 @@ class HistoryController extends Model {
     public function checkIn($twig){
         $getRegRented = $this->getRegRented();
         $map = ["getRegRented" => $getRegRented];
-        var_dump($map);
+        /*var_dump($map);*/
         if (isset($_POST['reg'])) {
             echo "Checking in!";
             //$this->createHistory();

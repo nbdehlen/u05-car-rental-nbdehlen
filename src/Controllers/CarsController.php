@@ -38,7 +38,7 @@ class CarsController extends Model {
     //Get selected Car for Edit
     public function getCarCtrl($twig) {
         $reg = explode("/", $_SERVER['REQUEST_URI']);
-        //var_dump($reg);
+        var_dump($reg[2]);
         $Colors = $this->getColors();
         $Makers = $this->getMakers();
         //$regplate = $reg[2];
@@ -65,7 +65,6 @@ class CarsController extends Model {
     }
     //get post values to send to model
     public function editCar() {
-        //$make = str_replace('%',' ',$_POST['Make']);
         $reg = $_POST['Registration'];
         $make = $_POST['Make'];
         $color = $_POST['Color'];
@@ -73,5 +72,25 @@ class CarsController extends Model {
         $price = $_POST['Price'];
 
         $this->setCarEdit($make, $color, $year, $price, $reg);
+    }
+
+    //Remove car
+    public function removeCar($twig) {
+        //$reg = $_POST['Registration'];
+        $regExplode = explode("/", $_SERVER['REQUEST_URI']);
+        //var_dump($regExplode);
+        $reg = $regExplode[2];
+
+        if ($regExplode[3] == "Free") {
+            //echo "Bil borttagen";
+            $this->setCarRemove($reg);
+            return $twig->loadTemplate("CarsAll.twig")->render([]);
+        }
+        //
+        //$this->setCarRemove($reg);
+        else {
+           // echo "Bilen är för närvarande uthyrd";
+            return $twig->loadTemplate("CarsAll.twig")->render([]);
+    }
     }
 }

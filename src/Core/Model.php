@@ -163,6 +163,12 @@ protected function setCarEdit($make, $color, $year, $price, $reg) {
     $stmt->execute([$make, $color, $year, $price, $reg]);
 }
 
+//Set car remove
+protected function setCarRemove($reg) {
+  $sql = "DELETE FROM Cars WHERE `Registration` = ?";
+  $stmt = $this->connect()->prepare($sql);
+  $stmt->execute([$reg]);
+}
 /*
 actualFunction:
             get $reg from function XXX

@@ -7,13 +7,16 @@ XXX add car XXX
    XXXX get Data back to sql XXXX
 XXXX ÅÄÖ XXXX
 
+
+
+XXX add / remove customer next to each customer on "Kunder" view. XXX
+
+
+
+Fully delete car/customer from history aswell on delete buttons
+Create history table with query
+
 month/day regExp
 kontrollsiffror personnummer regExp
 Registreringsnumret ska exkludera fula ord, siffror i text osv
-
-add / remove customer next to each customer on "Kunder" view.
-
-link history-checkout-checkin
-
-Grouping queries 
 

@@ -48,3 +48,5 @@ function addCarCtrl() {
     //time function to match checkOut date format
     return currentTime;
 }*/
+
+function deleteCarCtrl() {}

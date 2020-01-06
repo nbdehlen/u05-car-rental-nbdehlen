@@ -64,6 +64,11 @@
           $controller = new CarsController();
           return $controller->getCarCtrl($twig);
         }
+        else if (preg_match("/^\/(CarRemove)/", $path)) {
+          $controller = new CarsController();
+          return $controller->removeCar($twig);
+        }
+
         else {
           return "Router Error!";
         }

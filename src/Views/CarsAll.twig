@@ -24,17 +24,18 @@
         <input type="hidden" value="{{ value.Registration }}">
         <input type="submit" value="Edit">
         </form></td>
+        {% if value['Rented by'] != 'Free' %}
         <td> <form method="post" action="/CarRemove/{{ value.Registration }}">
-        <input type="submit" value="Remove">
+        <input type="submit" value="Remove" name="Registration" disabled>
+        {% else %}
+            <td> <form method="post" action="/CarRemove/{{ value.Registration }}"
+            onsubmit="return confirm('Ta bort bilen från bilregistret?');">
+        <input type="submit" value="Remove" name="Registration">
+        {% endif %}
         </form></td>
   </tr>
   {%  endfor %}
-       {#
-       <td> {{ value['Rented from'] }}</td>
-        edit td
-        remove td
-        </tr>
-        #}
+
   </table>
 
   <br>

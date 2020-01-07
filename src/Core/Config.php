@@ -10,11 +10,7 @@ class Config {
 
     protected function connect() {
         $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbName;
-        //You can do this in PDO but mmtuts likes to make things into functions
         $pdo = new PDO($dsn, $this->user, $this->pwd, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-
-        //Optional function for default way of pulling out data
-        //so we dont have to define it each time
         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         return $pdo;
     }

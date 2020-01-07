@@ -9,7 +9,7 @@
   <th> Postaddress </th>
   <th> Telefonnummer </th>
 
-  {%  for value in personArray %}
+  {% for value in personArray %}
   <tr>
         <td> {{ value['Personal number'] }}</td>
         <td> {{ value['Full name'] }}</td>
@@ -19,8 +19,19 @@
         <td><form method="post" action="/UserEdit/{{ value['Personal number'] }}/{{ value['Full name'] }}/{{ value.Address }}/{{ value['Phone number'] }}/{{ value['Postal address'] }}">
         <input type="submit" value="Edit">
         </form> </td>
+        
+        {% if value['Cars'] != NULL %}
+            <td><form method="post" action="/UserRemove/">
+            <input type="submit" value="Ta bort" disabled></form> </td>
+         {% else %}
+            <td><form method="post" action="/UserRemove/{{ value['Personal number'] }}/{{ value['Full name'] }}/{{ value.Address }}/{{ value['Phone number'] }}/{{ value['Postal address'] }}"
+            disabled>
+            <input type="submit" value="Ta bort"></form> </td>
+      {% endif %}
+{% endfor %}
+        
   </tr>
-  {%  endfor %}
+  
 
   </table>
   <br>

@@ -28,7 +28,7 @@
         <td> <form method="post" action="/CarRemove/{{ value.Registration }}">
         <input type="submit" value="Ta bort" name="Registration" disabled>
         {% else %}
-            <td> <form method="post" action="/CarRemove/{{ value.Registration }}"
+            <td> <form method="post" action="/CarRemove/{{ value.Registration }}" {#/{{ value['Rented by'] }} #}
             onsubmit="return confirm('Ta bort bilen från bilregistret?');">
         <input type="submit" value="Ta bort" name="Registration">
         {% endif %}

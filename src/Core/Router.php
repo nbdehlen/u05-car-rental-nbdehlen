@@ -76,6 +76,10 @@
           $controller = new UsersController();
           return $controller->getUserCtrl($twig);
         }
+        else if (preg_match("/^\/(UserRemove)/", $path)) {
+          $controller = new UsersController();
+          return $controller->removeUser($twig);
+        }
         else {
           return "Router Error!";
         }

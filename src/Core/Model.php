@@ -5,13 +5,58 @@
 
   class Model extends Config {
 
-      protected function getAll() {
-        $sql = "SELECT * FROM Customers";
+    //Join `rented by` where Cars.`Personal number` =
+      protected function getAllUsers() {
+       /* $sql = "SELECT * FROM Customers";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+        $allCustomers = $stmt->fetchAll();
+        //return $stmt->fetchAll();
+        $allDisabled = $this->disableUserRemove();*/
+      
+
+       /* for ($i = 0; $i < count($allCustomers); $i++) {
+          if ($allCustomers[$i]['Personal number'] == ) {
+            $boolArr[] = true; 
+          }*/
+
+        /*$sql = "SELECT * FROM Cars
+        LEFT JOIN Customers ON Customers.`Personal number` = Cars.`Rented by`
+        UNION ALL
+        SELECT * FROM Cars
+        RIGHT JOIN Customers ON Cars.`Rented by` = Customers.`Personal number`";*/
+        /*WHERE NOT EXISTS (SELECT 1 FROM Customers I)";*/
+
+        /*$sql = "SELECT * FROM Customers
+        LEFT JOIN Cars ON Customers.`Personal number` = Cars.`Rented by`
+        ";*/
+
+        $sql = "SELECT Customers.`Personal number`, `Full name`, `Address`, `Postal address`,
+        `Phone number`,
+         `Rented by` AS Cars
+         FROM Customers INNER JOIN Cars ON 
+         Customers.`Personal number` = Cars.`Rented by`
+         UNION
+         SELECT Customers.`Personal number`, `Full name`, `Address`, `Postal address`,
+        `Phone number`,
+        `Rented by` AS Cars
+        FROM Customers LEFT JOIN Cars ON
+        Customers.`Personal number` = Cars.`Rented by`
+         ";
+
+
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
-      }
+        //$allDisabled = $this->disableUserRemove();
+        }
 
+      /*protected function disableUserRemove() {
+        $sql = "SELECT `Rented by` FROM Cars";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+      }*/
 
       /*
       public function getIndex($index) {
@@ -147,9 +192,15 @@ protected function setCarEdit($make, $color, $year, $price, $reg) {
 
 //Set car remove
 protected function setCarRemove($reg) {
-  $sql = "DELETE FROM Cars WHERE `Registration` = ?";
+  $sql = "DELETE FROM History WHERE 
+  Registration = ?";
   $stmt = $this->connect()->prepare($sql);
   $stmt->execute([$reg]);
+
+  $sql2 = "DELETE FROM Cars WHERE 
+  Registration = ?";
+  $stmt2 = $this->connect()->prepare($sql2);
+  $stmt2->execute([$reg]);
 }
 
   //Set history for cars rented
@@ -260,6 +311,16 @@ protected function setUserEdit($name, $address, $phone, $postal, $pn) {
   $stmt->execute([$name, $address, $phone, $postal, $pn]);
 }
 
+//Set user remove
+protected function setUserRemove($pn) {
+  $sql2 = "DELETE FROM History WHERE `Personal number` = ?";
+  $stmt2 = $this->connect()->prepare($sql2);
+  $stmt2->execute([$pn]);
+
+  $sql = "DELETE FROM Customers WHERE `Personal number` = ?";
+  $stmt = $this->connect()->prepare($sql);
+  $stmt->execute([$pn]);
+}
 
 }
 

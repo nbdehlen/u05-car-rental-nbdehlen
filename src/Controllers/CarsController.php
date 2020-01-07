@@ -77,19 +77,19 @@ class CarsController extends Model {
     public function removeCar($twig) {
         //$reg = $_POST['Registration'];
         $regExplode = explode("/", $_SERVER['REQUEST_URI']);
-        //var_dump($regExplode);
+        var_dump($regExplode);
         $reg = $regExplode[2];
 
-        if ($regExplode[3] == "Free") {
+        //if ($regExplode[3] == "Free") {
             //echo "Bil borttagen";
             $this->setCarRemove($reg);
             return $twig->loadTemplate("CarsAll.twig")->render([]);
-        }
+        //}
         //
         //$this->setCarRemove($reg);
-        else {
+        //else {
            // echo "Bilen är för närvarande uthyrd";
-            return $twig->loadTemplate("CarsAll.twig")->render([]);
-    }
+         //   return $twig->loadTemplate("CarsAll.twig")->render([]);
+    //}
     }
 }

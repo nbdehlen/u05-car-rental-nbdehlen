@@ -37,9 +37,15 @@ class UsersController extends Model {
         //return $twig->loadTemplate("UserAdd.twig")->render($form);
     }
 
-    public function getUser($twig) { //should rename this
-        $personArray = $this->getAll();
+    //Populate customers view and disable if currently renting
+    public function getUser($twig) {
+        $personArray = $this->getAllUsers();
+        //var_dump($personArray);
+        //$disable = $this->disableUser();
         $map = ["personArray" => $personArray];
+             //   "disableUser" => $disable];
+             var_dump($map);
+    
         return $twig->loadTemplate("usersAll.twig")->render($map);
     }
 
@@ -76,6 +82,26 @@ class UsersController extends Model {
     
             $this->setUserEdit($name, $address, $phone, $postal, $pn);
         }
+
+            //Remove user
+    public function removeUser($twig) {
+        //$reg = $_POST['Registration'];
+        $regExplode = explode("/", $_SERVER['REQUEST_URI']);
+        //var_dump($regExplode);
+        $pn = $regExplode[2];
+
+        if ($regExplode[3] == "Free") {
+            echo "användare borttagen";
+           // $this->setUserRemove($pn);
+            //return $twig->loadTemplate("usersAll.twig")->render([]);
+        }
+        //
+        //$this->setCarRemove($pn);
+        else {
+           // echo "Bilen är för närvarande uthyrd";
+            return $twig->loadTemplate("usersAll.twig")->render([]);
+    }
+    }
 
 }
 

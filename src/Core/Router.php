@@ -72,6 +72,10 @@
           $controller = new HistoryController();
           return $controller->displayHistory($twig);
         }
+        else if (preg_match("/^\/(UserEdit)/", $path)) {
+          $controller = new UsersController();
+          return $controller->getUserCtrl($twig);
+        }
         else {
           return "Router Error!";
         }

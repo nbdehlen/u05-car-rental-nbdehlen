@@ -22,10 +22,10 @@ Check in:
         XXX remove Cars rented from and Rented by to "Free" XXX
 
 
-Fetch SQL to Calculate days, Calculate cost
-   render on history tab together with fetch from History
+XXXX Fetch SQL to Calculate days, Calculate cost XXX
+ XXX  render on history tab together with fetch from History XXX
 
-History view
+XXX History view XXX
 
 Edit/Remove Customer 
 

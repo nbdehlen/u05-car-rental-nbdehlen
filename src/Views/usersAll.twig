@@ -16,6 +16,9 @@
         <td> {{ value.Address }}</td>
         <td> {{ value['Postal address'] }} </td>
         <td> {{ value['Phone number'] }}</td>
+        <td><form method="post" action="/UserEdit/{{ value['Personal number'] }}/{{ value['Full name'] }}/{{ value.Address }}/{{ value['Phone number'] }}/{{ value['Postal address'] }}">
+        <input type="submit" value="Edit">
+        </form> </td>
   </tr>
   {%  endfor %}
 

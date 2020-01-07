@@ -43,6 +43,40 @@ class UsersController extends Model {
         return $twig->loadTemplate("usersAll.twig")->render($map);
     }
 
+        //Get selected User for Edit
+        public function getUserCtrl($twig) {
+            $pn = explode("/", $_SERVER['REQUEST_URI']);
+            var_dump($pn);
+
+            $map = [
+            "pn" => $pn[2],
+            "name" => str_replace("%20"," ", $pn[3]),
+            "address" => str_replace("%20"," ", $pn[4]),
+            "phone" => $pn[5],
+            "postal" => str_replace("%20"," ", $pn[6])];
+            //var_dump($_SERVER['REQUEST_URI']);
+    
+            if (isset($_POST['postal'])) {
+                $this->editUser();
+                //var_dump($_POST);
+                return $twig->loadTemplate("UserEdit.twig")->render($map);
+            } else {
+                return $twig->loadTemplate("UserEdit.twig")->render($map);
+            }
+        
+        }
+        //get post values to send to model
+        public function editUser() {
+            $pn = $_POST['pn'];
+            $name = $_POST['name'];
+            $address = $_POST['address'];
+            $phone = $_POST['phone'];
+            $postal = $_POST['postal'];
+            
+    
+            $this->setUserEdit($name, $address, $phone, $postal, $pn);
+        }
+
 }
 
   

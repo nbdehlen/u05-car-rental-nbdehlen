@@ -141,4 +141,4 @@ INSERT INTO History (`Personal number`, `Registration`, `Rented from`,
 VALUES (7612300144, "ABC123", "2019-12-18 12:53:24", 
 "2019-12-27 08:04:01");
 
-ALTER TABLE History (`Rented `)
+DELETE FROM History WHERE `Personal number` = 7612300144;

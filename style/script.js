@@ -10,7 +10,7 @@ function addCustomerCtrl() {
 
     if (teleMatch && tel.length == 10) {
         if (pnMatch && pn.length == 10) {
-            alert("Kund tillagd i registret");
+            alert("Kund tillagd/ändrad i registret");
             return true;
         } else {
             alert("Felaktigt personnummer");

@@ -221,7 +221,7 @@ __HTML;
   }
 
 
-  //convert dates into days and total cost
+  //convert dates into days and total cost for displaying history
   protected function getConvertions() {
     $sqlDates = "SELECT `Rented from`,`Rented until`, `Registration` FROM History";
     $stmt = $this->connect()->prepare($sqlDates);
@@ -247,9 +247,20 @@ __HTML;
       }
       return array($days, $cost, $reg);
   }
-  /*protected function getConvertions2() {*/
-  
-  /*}*/
+
+  //Set user to edit
+protected function setUserEdit($name, $address, $phone, $postal, $pn) {
+  $sql = "UPDATE Customers SET
+  `Full name` = ?,
+  `Address` = ?,
+  `Phone number` = ?,
+  `Postal address` = ?
+  WHERE `Personal number` = ?";
+  $stmt = $this->connect()->prepare($sql);
+  $stmt->execute([$name, $address, $phone, $postal, $pn]);
+}
+
+
 }
 
 /*

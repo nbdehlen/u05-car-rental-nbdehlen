@@ -3,13 +3,13 @@
 
 <table>
 <h1> Bilar </h1>
-  <th> Registration </th>
-  <th> Make </th>
-  <th> Color </th>
-  <th> Year </th>
-  <th> Price </th>
-  <th> Rented by </th>
-  <th> Rented from </th>
+  <th> Regskylt </th>
+  <th> Tillverkare </th>
+  <th> Färg </th>
+  <th> År </th>
+  <th> Pris </th>
+  <th> Uthyrd av </th>
+  <th> Uthyrd från </th>
 
   {%  for value in carArray %}
   <tr>
@@ -22,15 +22,15 @@
         <td> {{ value['Rented from'] }}</td>
         <td><form method="post" action="/CarEdit/{{ value.Registration }}/{{ value.Make }}/{{ value.Color }}">
         <input type="hidden" value="{{ value.Registration }}">
-        <input type="submit" value="Edit">
+        <input type="submit" value="Editera">
         </form></td>
         {% if value['Rented by'] != 'Free' %}
         <td> <form method="post" action="/CarRemove/{{ value.Registration }}">
-        <input type="submit" value="Remove" name="Registration" disabled>
+        <input type="submit" value="Ta bort" name="Registration" disabled>
         {% else %}
             <td> <form method="post" action="/CarRemove/{{ value.Registration }}"
             onsubmit="return confirm('Ta bort bilen från bilregistret?');">
-        <input type="submit" value="Remove" name="Registration">
+        <input type="submit" value="Ta bort" name="Registration">
         {% endif %}
         </form></td>
   </tr>
@@ -40,6 +40,6 @@
 
   <br>
         <form method="post" action="/CarAdd">
-        <input type="submit" value="Add Car">
+        <input type="submit" value="Lägg till bil">
       </form>
 {% include '/Partials/bottom.html' %}

@@ -135,3 +135,10 @@ UPDATE Cars SET
 `Rented by` ='Free', 
 `Rented from`= NULL
 WHERE `Registration` = 'ABC123';
+
+INSERT INTO History (`Personal number`, `Registration`, `Rented from`,
+`Rented until`)
+VALUES (7612300144, "ABC123", "2019-12-18 12:53:24", 
+"2019-12-27 08:04:01");
+
+ALTER TABLE History (`Rented `)

@@ -159,9 +159,9 @@ protected function setCarRemove($reg) {
       /*$sql = "INSERT INTO History (`Personal number`, `Registration`, `Cost`,
   `Rented from`, `Rented until`, `Days`)
   VALUES (?,?,?,?,?,?)";*/
-      $sql = "INSERT INTO History (`Personal number`, `Registration`,
+      $sql = "INSERT INTO History (`Registration`, `Personal number`,
       `Rented from`)
-      SELECT `Rented by`, Registration, `Rented from`
+      SELECT Registration, `Rented by`, `Rented from`
       FROM Cars WHERE `Registration` = ?";
 
       $stmt = $this->connect()->prepare($sql);
@@ -228,19 +228,37 @@ __HTML;
     $stmt->execute();
     $dates = $stmt->fetchAll();
 
+    $sqlPrice = "SELECT `Price` FROM Cars 
+      RIGHT JOIN History ON
+      Cars.Registration = History.Registration";
+      $stmt2 = $this->connect()->prepare($sqlPrice);
+      $stmt2->execute();
+      $prices = $stmt2->fetchAll();
+
     for ($i=0; $i< count($dates); $i++) {
-      $interval = strtotime($dates[$i]['Rented until']) - strtotime($dates[$i]['Rented from']);
+      $interval = strtotime($dates[$i]['Rented until']) 
+      - strtotime($dates[$i]['Rented from']);
+
       $days[] = ceil($interval/86400);
+
+      $cost[] = $prices[$i]['Price'] * $days[$i];
+      //echo $prices[$i]['Price'] . "  \n  ";
       $reg[] = $dates[$i]['Registration'];
       }
- 
-      $sqlPrice = "SELECT `Price` FROM Cars 
-      INNER JOIN History `Registration` W
-      WHERE
-      `Registration` ";
-      
+      return array($days, $cost, $reg);
   }
+  /*protected function getConvertions2() {*/
+  
+  /*}*/
+}
 
+/*
+
+  -....................
+  
+} else if 
+
+*/
   /*
 SQL: Count number of rows in history,
 SQL: Get Reg and Price from Cars table

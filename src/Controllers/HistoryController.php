@@ -64,10 +64,13 @@ class HistoryController extends Model {
 
     public function displayHistory($twig) {
         $getHistory = $this->getHistory();
-        $count = $this->getConvertions();
+        $convertions = $this->getConvertions();
         $map = ["getHistory" => $getHistory,
-                "getCount" => $count];
-        var_dump($map);
+                "getReg" => $convertions[2],
+                "getDays" => $convertions[0],
+                "getCost" => $convertions[1]];
+        //var_dump($convertions);
+        //var_dump($map);
     return $twig->loadTemplate("HistoryAll.twig")->render($map);
     }
 

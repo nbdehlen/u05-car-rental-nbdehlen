@@ -16,7 +16,6 @@ class CarsController extends Model {
         $map = ["getColors" => $Colors, "getMakers" => $Makers];
 
         if (isset($_POST['Registration'])) {
-            echo "CreateUser osv";
             $this->createCar();
             return $twig->loadTemplate("CarAdd.twig")->render($map);
         } else {

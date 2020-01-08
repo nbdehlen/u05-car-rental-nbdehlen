@@ -71,21 +71,64 @@ function addCustomerCtrl() {
 function addCarCtrl() {
     const reg = document.querySelector("#Registration").value;
     const year = Number(document.querySelector("#year").value);
+    const price = document.querySelector("#price").value;
 
     const regReq =/[A-Za-z]{3}[0-9]{3}/g;
     const regMatch = reg.match(regReq);
 
     const yearReq = year >= 1900 && year <= 2020;
 
+    const priceReq = Number(price) > 0;
+
+    const badWords = "APA, ARG, ASS, BAJ, BSS, CUC, CUK, DUM, ETA, ETT, \n\
+FAG, FAN, FEG, FEL, FEM, FES, FET, FNL, FUC, FUK, FUL, \n\
+GAM, GAY, GEJ, GEY, GHB, GUD, GYN, HAT, HBT, HKH, HOR, HOT, \n\
+KGB, KKK, KUC, KUF, KUG, KUK, KYK, LAM, LAT, LEM, LOJ, LSD, LUS, \n\
+MAD, MAO, MEN, MES, MLB, MUS, NAZ, NRP, NSF, NYP, \n\
+OND, OOO, ORM, PAJ, PKK, PLO, PMS, PUB, \n\
+RAP, RAS, ROM, RPS, RUS, SEG, SEX, SJU, SOS, SPY, SUG, SUP, SUR,\n\
+TBC, TOA, TOK, TRE, TYP, UFO, USA, WAM, WAR, WWW, XTC, XTZ, XXL, XXX, \n\
+ZEX, ZOG, ZPY, ZUG, ZUP, ZOO";
+
+    const badArr = badWords.split(", ", 200);
+    let letterReg = reg.slice(0,3);
+
     if (regMatch) {
         if (yearReq) {
+            for (let i=0; i<badArr.length; i++) {
+                if (letterReg.match(badArr[i])) {
+                    alert("Bra skämt, försök igen")
+                    return false;
+                } else if (!priceReq) {
+                    alert("Priset måste vara ett positivt tal");
+                    return false;
+                }
+            }
+
             alert("Bil tillagd/ändrad i registret");
             return true;
         } else {
             alert("Tillverkaråret måste vara mellan år 1900 och 2020");
             return false;
-        }
+        } 
     }
     alert("Felaktigt registreringsnummer");
     return false;
 }
+
+/*
+
+
+
+//const reg = document.querySelector("#Registration").value;
+
+const reg = "FEG123";
+const badArr = badWords.split(", ", 200);
+let letterReg = reg.slice(0,3);
+
+for (let i=0; i<badArr.length; i++) {
+    if (letterReg.match(badArr[i])) {
+        alert("Bra skämt, försök igen")
+        return false;
+    }
+}*/

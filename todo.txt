@@ -34,7 +34,12 @@ XX Fully delete car/customer from history aswell on delete buttons XX
 XX kontrollsiffror personnummer regExp XX
 XX Registreringsnumret ska exkludera fula ord, siffror i text osv XX
 
-Cleanup code w language and commenting
+XX add Car exakt number of letters in JS,  XX
+
+days in personnummer isnt calculating correctly in JS
+
+Cleanup JS code w language and commenting
+Commenting PHP code
 
 Add to github
 Add to binero

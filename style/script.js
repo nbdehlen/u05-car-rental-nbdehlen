@@ -73,19 +73,33 @@ function addCarCtrl() {
     const year = Number(document.querySelector("#year").value);
     const price = document.querySelector("#price").value;
 
-    const regReq =/[A-Za-z]{3}[0-9]{3}/g;
+    //Match start with 3 letters, ending with 3 numbers
+    const regReq =/^[A-Z]{3}[0-9]{3}$/g;
     const regMatch = reg.match(regReq);
 
     const yearReq = year >= 1900 && year <= 2020;
 
     const priceReq = Number(price) > 0;
 
-    const badWords = "APA, ARG, ASS, BAJ, BSS, CUC, CUK, DUM, ETA, ETT, FAG, FAN, FEG, FEL, FEM, FES, FET, FNL, FUC, FUK, FUL, GAM, GAY, GEJ, GEY, GHB, GUD, GYN, HAT, HBT, HKH, HOR, HOT, KGB, KKK, KUC, KUF, KUG, KUK, KYK, LAM, LAT, LEM, LOJ, LSD, LUS, MAD, MAO, MEN, MES, MLB, MUS, NAZ, NRP, NSF, NYP, OND, OOO, ORM, PAJ, PKK, PLO, PMS, PUB, RAP, RAS, ROM, RPS, RUS, SEG, SEX, SJU, SOS, SPY, SUG, SUP, SUR, TBC, TOA, TOK, TRE, TYP, UFO, USA, WAM, WAR, WWW, XTC, XTZ, XXL, XXX, ZEX, ZOG, ZPY, ZUG, ZUP, ZOO";
+    //String of letter groups that cant be used on reg plate
+    const badWords = "APA, ARG, ASS, BAJ, BSS, CUC, CUK, DUM, ETA, ETT, \n\
+    FAG, FAN, FEG, FEL, FEM, FES, FET, FNL, FUC, FUK, FUL, GAM, GAY, GEJ, \n\
+    GEY, GHB, GUD, GYN, HAT, HBT, HKH, HOR, HOT, KGB, KKK, KUC, KUF, KUG, \n\
+    KUK, KYK, LAM, LAT, LEM, LOJ, LSD, LUS, MAD, MAO, MEN, MES, MLB, MUS, \n\
+    NAZ, NRP, NSF, NYP, OND, OOO, ORM, PAJ, PKK, PLO, PMS, PUB, RAP, RAS, \n\
+    ROM, RPS, RUS, SEG, SEX, SJU, SOS, SPY, SUG, SUP, SUR, TBC, TOA, TOK, \n\
+    TRE, TYP, UFO, USA, WAM, WAR, WWW, XTC, XTZ, XXL, XXX, ZEX, ZOG, ZPY, \n\
+    ZUG, ZUP, ZOO";
 
-    const badArr = badWords.split(", ", 200);
+    /* Remove linebreakers, Split by comma, slice the first 3 letters 
+    from input reg plate and iterate to find a match */
+    const bwFilter = /\\n\\/g;
+    const filteredBadWords = badWords.replace(bwFilter, '');
+    const badArr = filteredBadWords.split(", ", 200);
     let letterReg = reg.slice(0,3);
-
+    
     if (regMatch) {
+        
         if (yearReq) {
             for (let i=0; i<badArr.length; i++) {
                 if (letterReg.match(badArr[i])) {
@@ -104,7 +118,8 @@ function addCarCtrl() {
             return false;
         } 
     }
-    alert("Felaktigt registreringsnummer");
+    alert("Felaktigt registreringsnummer. Kräver 3 stora bokstäver, \n\
+    3 siffror och inga otillåtna bokstavskombinationer");
     return false;
 }
 

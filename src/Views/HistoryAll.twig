@@ -10,18 +10,14 @@
   <th> Dagar </th>
   <th> Kostnad </th>
 
-
   {%  for value in getHistory %}
   <tr>
         <td> {{ value.Registration }}</td>
         <td> {{ value["Personal number"] }}</td>
         <td> {{ value["Rented from"] }}</td>
         <td> {{ value["Rented until"] }} </td>
-  {#  {%  endfor %}
-    {%  for value in getConv %} #}
-    <td> {{ getDays[loop.index0] }} </td> 
+        <td> {{ getDays[loop.index0] }} </td> 
         <td> {{ getCost[loop.index0] }} </td>
-      {#  <td> {{ getCount }}</td> #}
   </tr>
   {%  endfor %}
 

@@ -27,13 +27,14 @@ XXXX Fetch SQL to Calculate days, Calculate cost XXX
 
 XXX History view XXX
 
-Edit/Remove Customer 
+XX Edit/Remove Customer XX
 
-Fully delete car/customer from history aswell on delete buttons
+XX Fully delete car/customer from history aswell on delete buttons XX
 
-kontrollsiffror personnummer regExp
+XX kontrollsiffror personnummer regExp XX
 Registreringsnumret ska exkludera fula ord, siffror i text osv
 
 Cleanup code w language and commenting
 
+Add to github
 Add to binero

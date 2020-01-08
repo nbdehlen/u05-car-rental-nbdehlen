@@ -1,15 +1,9 @@
 <?php
-
 namespace Main\Controllers;
-use Main\Core\Request;
 use Main\Core\Model;
 
 class UsersController extends Model {
-    //Why we go into a separate class just to make a function to run another function?
-    //Why do we need to reroute it through our user controller?
-    //For security and to follow MVC model so UsersContr doesnt directly
-    //reference to the users class.
-    //Second reason is if we have multiple tables or classes this is an easier way
+
     public function userAdd($twig) {
         if (isset($_POST['PersonNumber'])) {
             $this->createUser();
@@ -19,32 +13,19 @@ class UsersController extends Model {
         }
     }
     
-    public function createUser(/*$twig*/) {
-        echo "accessing createUser function";
-       /* $form = new request;
-        $form->getForm();
-        var_dump($form->getForm());
-
-        $map = ["" => $];*/
+    public function createUser() {
         $PersonNumber = $_POST['PersonNumber'];
         $Name = $_POST['FullName'];
         $Address = $_POST['Address'];
         $PostalAddress = $_POST['PostalAddress'];
         $PhoneNumber = $_POST['telefonnummer'];
         $this->setUser($PersonNumber, $Name, $Address, $PostalAddress, $PhoneNumber);
-        //$this->setUser($PersonNumber, $Name, $Address, $PostalAddress, $PhoneNumber);
-
-        //return $twig->loadTemplate("UserAdd.twig")->render($form);
     }
 
     //Populate customers view and disable if currently renting
     public function getUser($twig) {
         $personArray = $this->getAllUsers();
-        //var_dump($personArray);
-        //$disable = $this->disableUser();
         $map = ["personArray" => $personArray];
-             //   "disableUser" => $disable];
-             var_dump($map);
     
         return $twig->loadTemplate("usersAll.twig")->render($map);
     }
@@ -60,17 +41,15 @@ class UsersController extends Model {
             "address" => str_replace("%20"," ", $pn[4]),
             "phone" => $pn[5],
             "postal" => str_replace("%20"," ", $pn[6])];
-            //var_dump($_SERVER['REQUEST_URI']);
     
             if (isset($_POST['postal'])) {
                 $this->editUser();
-                //var_dump($_POST);
                 return $twig->loadTemplate("UserEdit.twig")->render($map);
             } else {
                 return $twig->loadTemplate("UserEdit.twig")->render($map);
             }
-        
         }
+
         //get post values to send to model
         public function editUser() {
             $pn = $_POST['pn'];
@@ -78,37 +57,15 @@ class UsersController extends Model {
             $address = $_POST['address'];
             $phone = $_POST['phone'];
             $postal = $_POST['postal'];
-            
-    
             $this->setUserEdit($name, $address, $phone, $postal, $pn);
         }
 
             //Remove user
     public function removeUser($twig) {
-        //$reg = $_POST['Registration'];
         $regExplode = explode("/", $_SERVER['REQUEST_URI']);
-        //var_dump($regExplode);
         $pn = $regExplode[2];
-
-        if ($regExplode[3] == "Free") {
-            echo "användare borttagen";
-           // $this->setUserRemove($pn);
-            //return $twig->loadTemplate("usersAll.twig")->render([]);
-        }
-        //
-        //$this->setCarRemove($pn);
-        else {
-           // echo "Bilen är för närvarande uthyrd";
-            return $twig->loadTemplate("usersAll.twig")->render([]);
+        echo "användare borttagen";
+        $this->setUserRemove($pn);
+        return $twig->loadTemplate("usersAll.twig")->render([]);
     }
-    }
-
 }
-
-  
-/*class MainController {
-    public function mainMenu($twig) {
-      $emptyMap = [];
-      return $twig->loadTemplate("test.twig")->render($emptyMap);
-    }
-}*/

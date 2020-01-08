@@ -1,35 +1,11 @@
 <?php
   namespace Main\Core;
   use PDOException;
-  use DateTime;
 
   class Model extends Config {
 
-    //Join `rented by` where Cars.`Personal number` =
+    //Get users and list of which are currently renting
       protected function getAllUsers() {
-       /* $sql = "SELECT * FROM Customers";
-        $stmt = $this->connect()->prepare($sql);
-        $stmt->execute();
-        $allCustomers = $stmt->fetchAll();
-        //return $stmt->fetchAll();
-        $allDisabled = $this->disableUserRemove();*/
-      
-
-       /* for ($i = 0; $i < count($allCustomers); $i++) {
-          if ($allCustomers[$i]['Personal number'] == ) {
-            $boolArr[] = true; 
-          }*/
-
-        /*$sql = "SELECT * FROM Cars
-        LEFT JOIN Customers ON Customers.`Personal number` = Cars.`Rented by`
-        UNION ALL
-        SELECT * FROM Cars
-        RIGHT JOIN Customers ON Cars.`Rented by` = Customers.`Personal number`";*/
-        /*WHERE NOT EXISTS (SELECT 1 FROM Customers I)";*/
-
-        /*$sql = "SELECT * FROM Customers
-        LEFT JOIN Cars ON Customers.`Personal number` = Cars.`Rented by`
-        ";*/
 
         $sql = "SELECT Customers.`Personal number`, `Full name`, `Address`, `Postal address`,
         `Phone number`,
@@ -41,56 +17,13 @@
         `Phone number`,
         `Rented by` AS Cars
         FROM Customers LEFT JOIN Cars ON
-        Customers.`Personal number` = Cars.`Rented by`
-         ";
-
+        Customers.`Personal number` = Cars.`Rented by`";
 
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
-        //$allDisabled = $this->disableUserRemove();
         }
 
-      /*protected function disableUserRemove() {
-        $sql = "SELECT `Rented by` FROM Cars";
-        $stmt = $this->connect()->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll();
-      }*/
-
-      /*
-      public function getIndex($index) {
-        if ($index < count($this->personArray)) {
-          return $this->personArray[$index];
-        }
-        else {
-          return null;
-        }
-      }
-      
-      public function getInterval($startIndex, $lastIndex) {
-        if (($startIndex >= 0) && ($lastIndex < count($this->personArray))) {
-          return $this->personArray;
-        }
-        else {
-          return null;
-        }
-      }
-*/
-      /*public function getInterval($startIndex, $lastIndex) {
-        if (($startIndex >= 0) && ($lastIndex < count($this->personArray))) {
-          $result = [];
-
-          for ($index = $startIndex; $index <= $lastIndex; ++$index) {
-             $result[] = $this->personArray[$index];
-          }
-
-          return $result;
-        }
-        else {
-          return null;
-        }
-      }*/
 
       //Add new user 
     protected function setUser($PersonNumber, $Name, $Address, 
@@ -121,6 +54,7 @@
         $stmt->execute([$Registration, $Make, $Color, $Year, 
         $Price]);
     }
+
    //Get list of allowed car colors
     protected function getColors(){
       $sql = "SELECT * FROM `Allowed Colors`";
@@ -139,13 +73,10 @@
 
   //Get list of cars currently not being rented
   protected function getRegFree() {
-    //Prepared statement
     $sql = "SELECT `Registration`, `Color`, `Make` FROM Cars WHERE
     `Rented by` = 'Free'";
-    //$sql = [$sql1, $sql2];
     $stmt = $this->connect()->prepare($sql);
     $stmt->execute();
-    //var_dump($sql);
     return $stmt->fetchAll();
 }
 
@@ -154,7 +85,6 @@ protected function getPr() {
   $sql = "SELECT `Personal number` FROM Customers";
   $stmt = $this->connect()->prepare($sql);
   $stmt->execute();
-  //var_dump($sql);
   return $stmt->fetchAll();
 }
 
@@ -171,20 +101,15 @@ protected function setCheckOutTime($rentedBy, $reg) {
 protected function getRegRented() {
   $sql = "SELECT `Registration`, `Color`, `Make` FROM Cars WHERE
   `Rented by` != 'Free'";
-  //$sql = [$sql1, $sql2];
   $stmt = $this->connect()->prepare($sql);
   $stmt->execute();
-  //var_dump($sql);
   return $stmt->fetchAll();
 }
 
 //Set Car to edit
 protected function setCarEdit($make, $color, $year, $price, $reg) {
     $sql = "UPDATE Cars SET
-    `Make` = ?,
-    `Color` = ?,
-    `Year` = ?,
-    `Price` = ?
+    `Make` = ?, `Color` = ?, `Year` = ?, `Price` = ?
     WHERE `Registration` = ?";
     $stmt = $this->connect()->prepare($sql);
     $stmt->execute([$make, $color, $year, $price, $reg]);
@@ -204,12 +129,8 @@ protected function setCarRemove($reg) {
 }
 
   //Set history for cars rented
-  protected function setRegReturned($reg)
-{
+  protected function setRegReturned($reg){
     try {
-      /*$sql = "INSERT INTO History (`Personal number`, `Registration`, `Cost`,
-  `Rented from`, `Rented until`, `Days`)
-  VALUES (?,?,?,?,?,?)";*/
       $sql = "INSERT INTO History (`Registration`, `Personal number`,
       `Rented from`)
       SELECT Registration, `Rented by`, `Rented from`
@@ -230,40 +151,7 @@ protected function setCarRemove($reg) {
       echo "Error : " . $e->getMessage();
     }
   }
-/*
-actualFunction:
-            get $reg from function XXX
-SQLcalcs based on row matching $reg actualFunction :
-       XXXX get "person number" from Cars(rented by)XXXX
-       XXX get "rented from" from Cars(registration matching $reg) XXX
-        XXX Update Cars based on matching $reg XXXX
-ownFunction:  
-            Calculate days here
-            Calculate cost here (price*days)
-ownSQL:
-           XXXUpdate "Rented until" with NOW(); XXX
-*/
-
-/*
-$abg = <<< SQL
-  SELECT * FROM Cars WHERE `Registration` = $reg
-  INSERT INTO History (`Personal number`, `Registration`, `Cost`,
-  `Rented from`, `Rented until`, `Days`)
-  VALUES()
-SQL;
-*/
-/*
-
- public function transfer($fromAccountNumber) {
-    $customersQuery = <<< __HTML
-       SELECT CONCAT(customer.customerNumber, ',',
-       customer.customerName, ',', account.accountNumber)
-       FROM Customers customer JOIN Accounts account
-       ON ((customer.customerNumber = account.customerNumber)
-       AND (accountNumber != :fromAccountNumber));
-__HTML;
-
-*/
+  //get history
   protected function getHistory() {
       $sql = "SELECT * FROM History";
       $stmt = $this->connect()->prepare($sql);
@@ -293,7 +181,7 @@ __HTML;
       $days[] = ceil($interval/86400);
 
       $cost[] = $prices[$i]['Price'] * $days[$i];
-      //echo $prices[$i]['Price'] . "  \n  ";
+
       $reg[] = $dates[$i]['Registration'];
       }
       return array($days, $cost, $reg);
@@ -321,24 +209,4 @@ protected function setUserRemove($pn) {
   $stmt = $this->connect()->prepare($sql);
   $stmt->execute([$pn]);
 }
-
 }
-
-/*
-
-  -....................
-  
-} else if 
-
-*/
-  /*
-SQL: Count number of rows in history,
-SQL: Get Reg and Price from Cars table
-SQL: Get Days from History table
-for each row:
-        get days in an array,
-        get cost in an array
-End for each
-
-Sum of all cost
-  */

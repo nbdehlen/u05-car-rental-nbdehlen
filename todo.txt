@@ -32,7 +32,7 @@ XX Edit/Remove Customer XX
 XX Fully delete car/customer from history aswell on delete buttons XX
 
 XX kontrollsiffror personnummer regExp XX
-Registreringsnumret ska exkludera fula ord, siffror i text osv
+XX Registreringsnumret ska exkludera fula ord, siffror i text osv XX
 
 Cleanup code w language and commenting
 

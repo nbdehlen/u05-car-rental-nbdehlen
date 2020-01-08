@@ -17,7 +17,7 @@
         <td> {{ value['Postal address'] }} </td>
         <td> {{ value['Phone number'] }}</td>
         <td><form method="post" action="/UserEdit/{{ value['Personal number'] }}/{{ value['Full name'] }}/{{ value.Address }}/{{ value['Phone number'] }}/{{ value['Postal address'] }}">
-        <input type="submit" value="Edit">
+        <input type="submit" value="Editera">
         </form> </td>
         
         {% if value['Cars'] != NULL %}
@@ -36,6 +36,6 @@
   </table>
   <br>
         <form method="post" action="/UserAdd">
-        <input type="submit" value="Add Customer">
+        <input type="submit" value="Lägg till kund">
       </form>
 {% include '/Partials/bottom.html' %}

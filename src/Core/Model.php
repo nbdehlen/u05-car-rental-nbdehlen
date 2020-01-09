@@ -152,16 +152,46 @@ protected function setCarRemove($reg) {
     }
   }
   //get history
-  protected function getHistory() {
+  /*protected function getHistory() {
       $sql = "SELECT * FROM History";
       $stmt = $this->connect()->prepare($sql);
       $stmt->execute();
       return $stmt->fetchAll();
-  }
+  }*/
+
+protected function getConvertions() {
+  $sql = "SELECT History.`Registration`, History.`Personal number`,
+  History.`Rented from`, History.`Rented until`,
+  Price AS Price FROM History INNER JOIN Cars ON
+   History.`Registration` = Cars.`Registration` 
+   UNION SELECT History.`Registration`, History.`Personal number`,
+   History.`Rented from`, History.`Rented until`,
+   Price AS Price
+    FROM History LEFT JOIN Cars ON
+  History.`Registration` = Cars.`Registration`";
+  $stmt = $this->connect()->prepare($sql);
+  $stmt->execute();
+  $historyPrice = $stmt->fetchAll();
+  var_dump($historyPrice);
+  for ($i=0; $i< count($historyPrice); $i++) {
+    $interval = strtotime($historyPrice[$i]['Rented until']) 
+    - strtotime($historyPrice[$i]['Rented from']);
+
+    //$days[] = ceil($interval/86400);
+    $historyPrice[$i]['Days'] = ceil($interval/86400);
+    $historyPrice[$i]['Cost'] = $historyPrice[$i]['Price'] * $historyPrice[$i]['Days'];
+
+    //$reg[] = $historyPrice[$i]['Registration'];
+    }
+    //var_dump($days);
+    //var_dump($cost);
+    //var_dump($historyPrice);
+    return ($historyPrice);
+}
 
 
   //convert dates into days and total cost for displaying history
-  protected function getConvertions() {
+ /* protected function getConvertions() {
     $sqlDates = "SELECT `Rented from`,`Rented until`, `Registration` FROM History";
     $stmt = $this->connect()->prepare($sqlDates);
     $stmt->execute();
@@ -186,6 +216,7 @@ protected function setCarRemove($reg) {
       }
       return array($days, $cost, $reg);
   }
+*/
 
   //Set user to edit
 protected function setUserEdit($name, $address, $phone, $postal, $pn) {

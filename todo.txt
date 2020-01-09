@@ -36,7 +36,11 @@ XX Registreringsnumret ska exkludera fula ord, siffror i text osv XX
 
 XX add Car exakt number of letters in JS,  XX
 
-days in personnummer isnt calculating correctly in JS
+XX days in personnummer isnt calculating correctly in JS XX
+
+
+History days and cost are wrong.
+Add Sum
 
 Cleanup JS code w language and commenting
 Commenting PHP code

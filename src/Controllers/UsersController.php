@@ -33,7 +33,6 @@ class UsersController extends Model {
         //Get selected User for Edit
         public function getUserCtrl($twig) {
             $pn = explode("/", $_SERVER['REQUEST_URI']);
-            var_dump($pn);
 
             $map = [
             "pn" => $pn[2],

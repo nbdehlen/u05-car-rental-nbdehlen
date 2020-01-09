@@ -28,7 +28,8 @@ function controlPn() {
     const tel = document.querySelector("#telefonnummer").value;
     const telStr = String(tel);
     const teleMatch = telStr.charAt(0);
-    const pnReq = /[0-9]{2}(?:0[1-9]|1[12])[0-3][0-9][0-9]{4}/g;
+    const pnReq =
+    /[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1-2][0-9]|3[0-1])[0-9]{4}/g;
     const pnMatch = pn.match(pnReq);
 
     if (teleMatch == 0 && telStr.length == 10) {
@@ -94,16 +95,11 @@ function addCarCtrl() {
     /* Remove linebreakers/special chars, Split string to array by comma, 
     trim whitespace from returned array inside loop. 
     Slice the first 3 letters from input reg plate and iterate to find a match */
+    
     const bwFilter = /[^\x20-\x7E]/gmi;
     const noBreaksBadWords = badWords.replace(bwFilter,'');
-
-    //const ArrBadWords = noBrBadWords.split(", ", 200);
-    /*for (let i = 0; i < ArrBadWords.length; i++) {
-
-    }*/
-    //const trimmedArr = filteredBadWords.trim();
     const badArr = noBreaksBadWords.split(",", 200);
-    let letterReg = reg.slice(0,3);
+    const letterReg = reg.slice(0,3);
     
     if (regMatch) {
         

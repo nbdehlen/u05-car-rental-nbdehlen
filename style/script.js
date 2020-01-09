@@ -91,19 +91,28 @@ function addCarCtrl() {
     TRE, TYP, UFO, USA, WAM, WAR, WWW, XTC, XTZ, XXL, XXX, ZEX, ZOG, ZPY, \n\
     ZUG, ZUP, ZOO";
 
-    /* Remove linebreakers, Split by comma, slice the first 3 letters 
-    from input reg plate and iterate to find a match */
-    const bwFilter = /\\n\\/g;
-    const filteredBadWords = badWords.replace(bwFilter, '');
-    const badArr = filteredBadWords.split(", ", 200);
+    /* Remove linebreakers/special chars, Split string to array by comma, 
+    trim whitespace from returned array inside loop. 
+    Slice the first 3 letters from input reg plate and iterate to find a match */
+    const bwFilter = /[^\x20-\x7E]/gmi;
+    const noBreaksBadWords = badWords.replace(bwFilter,'');
+
+    //const ArrBadWords = noBrBadWords.split(", ", 200);
+    /*for (let i = 0; i < ArrBadWords.length; i++) {
+
+    }*/
+    //const trimmedArr = filteredBadWords.trim();
+    const badArr = noBreaksBadWords.split(",", 200);
     let letterReg = reg.slice(0,3);
     
     if (regMatch) {
         
         if (yearReq) {
+            let badArrTrim = [];
             for (let i=0; i<badArr.length; i++) {
-                if (letterReg.match(badArr[i])) {
-                    alert("Bra skämt, försök igen")
+                badArrTrim[i] = badArr[i].trim();
+                if (letterReg.match(badArrTrim[i])) {
+                    alert("Bra skämt, försök igen");
                     return false;
                 } else if (!priceReq) {
                     alert("Priset måste vara ett positivt tal");
@@ -114,7 +123,7 @@ function addCarCtrl() {
             alert("Bil tillagd/ändrad i registret");
             return true;
         } else {
-            alert("Tillverkaråret måste vara mellan år 1900 och 2020");
+            alert("Tillverkningsåret måste vara mellan år 1900 och 2020");
             return false;
         } 
     }
@@ -122,20 +131,3 @@ function addCarCtrl() {
     3 siffror och inga otillåtna bokstavskombinationer");
     return false;
 }
-
-/*
-
-
-
-//const reg = document.querySelector("#Registration").value;
-
-const reg = "FEG123";
-const badArr = badWords.split(", ", 200);
-let letterReg = reg.slice(0,3);
-
-for (let i=0; i<badArr.length; i++) {
-    if (letterReg.match(badArr[i])) {
-        alert("Bra skämt, försök igen")
-        return false;
-    }
-}*/

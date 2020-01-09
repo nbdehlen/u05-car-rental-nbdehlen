@@ -1,4 +1,14 @@
-// Check Personal number last digit is valid
+/* Check Personal number last digit is valid by multiplying every even number
+   with 1 and every odd number with 2. if result from odd number is double digits
+   it gets split into two single digits (Example: 6*2 = 12 would become 1,2).
+   the output gets ran through the Lugn algorithm and matched with the last digit
+   of the personal number.
+
+   Javascript Date function rolls over to next month if input days are larger than 
+   the amount of days in input month.
+   Example of how JS interpets dates: new Date(2014, 04, 54) becomes "Mon Jun 23 2014"
+   As we are not allowed to use frameworks I made a custom implementation.
+*/
 
 function controlPn() {
     const pn = document.querySelector("#personnummer").value;
@@ -21,19 +31,46 @@ function controlPn() {
 
     let lastDigit = (10 - (digits % 10)) % 10;
     if (pnStr.slice(-1) != lastDigit) {
-        alert("Felaktig kontrollsiffra" + lastDigit + "   " +digits);
+        alert("Felaktig kontrollsiffra " + lastDigit + "   " +digits);
         return false;
     } 
+
+    const pnYear = pn.slice(0,2);
+    const pnMd = pn.slice(2,6);
+    let invalidDates = ["0230","0231","0431","0631","0931","1131"];
+
+    /*Days of month validation
+    Push 29th feb to list of invalid dates if birth year is not a leap year.*/
+    function dateValidation() {
+        if (!leapYear()) {invalidDates.push("0229")}; 
+
+            for (let i=0; i<invalidDates.length ;i++) {
+               if (invalidDates[i].match(pnMd)) {
+                   return false;
+               };
+            }
+            return true;
+        }
+
+    function leapYear() {
+        for (let i=0; i < 100; i+=4) {
+            if (pnYear == i) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     const tel = document.querySelector("#telefonnummer").value;
     const telStr = String(tel);
     const teleMatch = telStr.charAt(0);
+    // Match year, month, day up to 31 followed by any 4 numbers
     const pnReq =
     /[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1-2][0-9]|3[0-1])[0-9]{4}/g;
     const pnMatch = pn.match(pnReq);
 
     if (teleMatch == 0 && telStr.length == 10) {
-        if (pnMatch == pn && pn.length == 10) {
+        if (pnMatch == pn && pn.length == 10 && dateValidation()) {
             alert("Kund tillagd/ändrad i registret");
             return true;
         } else {
@@ -45,29 +82,7 @@ function controlPn() {
     return false;
 }
 
-function addCustomerCtrl() {
-    const pn = String(document.querySelector("#personnummer").value);
-    const tel = document.querySelector("#telefonnummer").value;
-    const telStr = String(tel);
-    const pnReq = /[0-9]{2}(?:0[1-9]|1[12])[0-3][0-9][0-9]{4}/g;
-    const pnMatch = pn.match(pnReq);
-
-    const teleMatch = telStr.charAt(0);
-    //const teleReq = /^0/g;
-    //const teleMatch = String(tel).match(teleReq);
-
-    if (teleMatch == 0 && telStr.length == 10) {
-        if (pnMatch == pn && pn.length == 10) {
-            alert("Kund tillagd/ändrad i registret");
-            return true;
-        } else {
-            alert("Felaktigt personnummer1" + pn);
-            return false;
-        }
-    }
-    alert("Telefonnumret måste börja med en nolla och innehålla exakt 10 nummer");
-    return false;
-}
+function addCustomerCtrl() {}
 
 function addCarCtrl() {
     const reg = document.querySelector("#Registration").value;
@@ -75,7 +90,7 @@ function addCarCtrl() {
     const price = document.querySelector("#price").value;
 
     //Match start with 3 letters, ending with 3 numbers
-    const regReq =/^[A-Z]{3}[0-9]{3}$/g;
+    const regValid =/^[A-Z]{3}[0-9]{3}$/g;
     const regMatch = reg.match(regReq);
 
     const yearReq = year >= 1900 && year <= 2020;
@@ -101,10 +116,11 @@ function addCarCtrl() {
     const badArr = noBreaksBadWords.split(",", 200);
     const letterReg = reg.slice(0,3);
     
-    if (regMatch) {
+    if (regValid) {
         
         if (yearReq) {
             let badArrTrim = [];
+            //Checking for bad words in reg plate
             for (let i=0; i<badArr.length; i++) {
                 badArrTrim[i] = badArr[i].trim();
                 if (letterReg.match(badArrTrim[i])) {

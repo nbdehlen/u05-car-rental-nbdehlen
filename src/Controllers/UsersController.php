@@ -51,7 +51,7 @@ class UsersController extends Model {
     
             if (isset($_POST['postal'])) {
                 $this->editUser();
-            return $twig->loadTemplate("usersAll.twig")->render($map);
+            return $twig->loadTemplate("userEdit.twig")->render($map);
             } else {
             return $twig->loadTemplate("UserEdit.twig")->render($map);
             }

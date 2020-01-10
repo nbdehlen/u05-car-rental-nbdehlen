@@ -18,9 +18,7 @@ CREATE TABLE Cars (
   `Price` FLOAT UNSIGNED NOT NULL,
   `Rented by` VARCHAR(10) DEFAULT "Free",
   `Rented from` DATETIME DEFAULT NULL,
-  PRIMARY KEY(`Registration`),
-  `Personal number` VARCHAR(10),
-  FOREIGN KEY (`Personal number`) REFERENCES Customers(`Personal number`));
+  PRIMARY KEY(`Registration`);
 
 CREATE TABLE `Allowed Colors` (
 `Colors` VARCHAR(20) NOT NULL KEY);
@@ -33,20 +31,9 @@ CREATE TABLE `History` (
   `Personal number` VARCHAR(10),
   `Rented from` DATETIME DEFAULT NULL,
   `Rented until` DATETIME DEFAULT NULL,
-  `Days` INT DEFAULT NULL,
-  `Cost` FLOAT NOT NULL,
   FOREIGN KEY (`Registration`) REFERENCES Cars(`Registration`),
   FOREIGN KEY (`Personal number`) REFERENCES Customers(`Personal number`));
   
-ALTER TABLE Cars ADD `Rented from` VARCHAR(50);
-ALTER TABLE Cars ADD FOREIGN KEY (`Rented from`) REFERENCES `History`(`Rented from`);
-
-
-INSERT INTO Accounts(customerNumber) SELECT customerNumber FROM Customers WHERE customerName = 'Filip Gustavsson';
-INSERT INTO Events(accountNumber, amount) SELECT accountNumber, -300 FROM Accounts WHERE accountNumber = 3;
-INSERT INTO Accounts(customerNumber) SELECT customerNumber FROM Customers WHERE customerName = 'Bertil Ceasarsson';
-
-
 INSERT INTO Customers (
 `Personal number`, `Full name`, `Address`, `Postal address`, `Phone number`)
   VALUES(
@@ -55,12 +42,12 @@ INSERT INTO Customers (
 INSERT INTO Customers (
   `Personal number`, `Full name`, `Address`, `Postal address`, `Phone number`)
   VALUES
-  (4811270481, "Darwin Eichart", "Nygatan 13", "11712 Stockholm", "0714155671"),
-  (7612300144, "Hamburger Man", "Backeby 45", "11824 Stockholm", "0788451112"),
-  (9804019172, "Bob Dylan", "Hornsgatan 12", "11725 Stockholm", "0786612451"),
-  (6401126132, "Dr.Alban", "Vasagatan 113A", "11842 Stockholm", "0707441144"),
-  (9108091142, "Michael Jackson", "Hornsgatan 12", "11725 Stockholm", "0845127712"),
-  (8411081178, "Da Baby", "Västra svärdlångsvägen 12", "11725 Stockholm", "0739912451");
+  (8001112013, "Darwin Eichart", "Nygatan 13", "11712 Stockholm", "0714155671"),
+  (5611291047, "Hamburger Man", "Backeby 45", "11824 Stockholm", "0788451112"),
+  (1802222685, "Bob Dylan", "Hornsgatan 12", "11725 Stockholm", "0786612451"),
+  (2403131556, "Dr.Alban", "Vasagatan 113A", "11842 Stockholm", "0707441144"),
+  (8205030789, "Michael Jackson", "Hornsgatan 12", "11725 Stockholm", "0845127712"),
+  (1412148197, "Da Baby", "Västra svärdlångsvägen 12", "11725 Stockholm", "0739912451");
 
 INSERT INTO Cars (
   `Registration`, `Make`, `Color`, `Year`, `Price`)
@@ -80,6 +67,12 @@ INSERT INTO `Allowed Makers` (Makers)
 VALUES
 ("Toyota"), ("Volvo"), ("Peugot"), ("Nissan"), ("General Motors"), ("Tesla");
 
+
+
+
+
+
+
 ALTER TABLE Cars MODIFY 
 COLUMN `Rented from` VARCHAR(50) NOT NULL DEFAULT "Free";
 
@@ -97,7 +90,13 @@ ALTER TABLE Cars DROP FOREIGN KEY Cars_ibfk_2;
 SELECT `Registration`, `Color`, `Make` FROM Cars WHERE
     (History.`Rented from` IS NULL OR History.`Rented from` = `Free`);
 
+ALTER TABLE Cars ADD `Rented from` VARCHAR(50);
+ALTER TABLE Cars ADD FOREIGN KEY (`Rented from`) REFERENCES `History`(`Rented from`);
 
+
+INSERT INTO Accounts(customerNumber) SELECT customerNumber FROM Customers WHERE customerName = 'Filip Gustavsson';
+INSERT INTO Events(accountNumber, amount) SELECT accountNumber, -300 FROM Accounts WHERE accountNumber = 3;
+INSERT INTO Accounts(customerNumber) SELECT customerNumber FROM Customers WHERE customerName = 'Bertil Ceasarsson';
 
 SELECT * FROM Cars WHERE `Registration` = "ABC123"
 

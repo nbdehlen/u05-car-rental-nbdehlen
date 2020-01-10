@@ -26,11 +26,11 @@
       <input type="submit" value="Ta bort" disabled>
       </form> </td>
          {% else %}
-             <td><form method="post" accept-charset="UTF-8" action="/UserEdit/{{ value['Personal number'] }}/{{ value['Full name'] }}/{{ value.Address }}/{{ value['Phone number'] }}/{{ value['Postal address'] }}">
+             <td><form method="post" action="/UserEdit/{{ value['Personal number'] }}/{{ value['Full name'] }}/{{ value.Address }}/{{ value['Phone number'] }}/{{ value['Postal address'] }}">
         <input type="submit" value="Editera">
         </form> </td>
         
-            <td><form method="post" action="/UserRemove/{{ value['Personal number'] }}/{{ value['Full name'] }}/{{ value.Address }}/{{ value['Phone number'] }}/{{ value['Postal address'] }}"
+            <td><form method="post" onsubmit="confirm('Är du säker på att du vill ta bort användaren?');" action="/UserRemove/{{ value['Personal number'] }}/{{ value['Full name'] }}/{{ value.Address }}/{{ value['Phone number'] }}/{{ value['Postal address'] }}"
             disabled>
             <input type="submit" value="Ta bort"></form> </td>
       {% endif %}

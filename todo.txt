@@ -46,7 +46,7 @@ XX no edit on cars and customers while rented out XX
 XX Add Sum XX
 
 
-Personal number i cars? går att använda?
+XX Personal number i cars? går att använda? XX
 
 Cleanup JS code w language and commenting
 Commenting PHP code

@@ -41,9 +41,9 @@ XX days in personnummer isnt calculating correctly in JS XX
 
 XX  History days and cost are wrong. XX
 
-no edit on cars and customers while rented out 
+XX no edit on cars and customers while rented out XX
 
-Add Sum
+XX Add Sum XX
 
 
 Personal number i cars? går att använda?

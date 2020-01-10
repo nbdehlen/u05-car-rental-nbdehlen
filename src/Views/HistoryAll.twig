@@ -10,18 +10,24 @@
   <th> Dagar </th>
   <th> Kostnad </th>
 
+{% set totalCost = 0 %}
   {%  for value in historyPrice %}
   <tr>
         <td> {{ value.Registration }}</td>
         <td> {{ value["Personal number"] }}</td>
         <td> {{ value["Rented from"] }}</td>
         <td> {{ value["Rented until"] }} </td>
-        <td> {{ value.Days }} </td> 
-        <td> {{ value.Cost }} </td>
+        <td style="text-align: center;"> {{ value.Days }} </td> 
+        <td style="text-align: right;"> {{ value.Cost }} </td>
   </tr>
-  {%  endfor %}
 
-  </table>
+  {% set totalCost = totalCost + value.Cost %}
+  {%  endfor %}
+  <tr> 
+      <td colspan="5" style="text-align: right; font-weight: bold;"> Summa </td> 
+      <td style="text-align: right;"> {{ totalCost }}  </td> 
+  </tr>
+</table>
 
 {% include '/Partials/bottom.html' %}
 

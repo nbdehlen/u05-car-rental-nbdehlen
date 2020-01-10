@@ -15,6 +15,7 @@ table{
 
 tr {
     text-align: left;
+    border-bottom: 1px solid rgb(134, 130, 130);
 }
 
 td {
@@ -22,11 +23,14 @@ td {
    padding-left: 4px;
 }
 
-tr {
-   border-bottom: 1px solid rgb(134, 130, 130);
-   /* background-color: rgb(218, 216, 216);*/
-}
-
 th {
     background-color: rgb(218, 216, 216);
+}
+
+#sum {
+    font-weight: bold;
+}
+
+#cost {
+    text-align: right;
 }

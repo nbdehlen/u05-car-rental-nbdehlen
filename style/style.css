@@ -27,10 +27,11 @@ th {
     background-color: rgb(218, 216, 216);
 }
 
-#sum {
+#sum-title {
+    text-align: right;
     font-weight: bold;
 }
 
-#cost {
+#sum-cost {
     text-align: right;
 }

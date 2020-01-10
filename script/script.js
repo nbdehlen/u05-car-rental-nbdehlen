@@ -90,8 +90,8 @@ function addCarCtrl() {
     const price = document.querySelector("#price").value;
 
     //Match start with 3 letters, ending with 3 numbers
-    const regValid =/^[A-Z]{3}[0-9]{3}$/g;
-    const regMatch = reg.match(regReq);
+    const regValid =/^[A-Z]{3}[0-9]{3}$/gm;
+    const regMatch = reg.match(regValid);
 
     const yearReq = year >= 1900 && year <= 2020;
 
@@ -116,7 +116,7 @@ function addCarCtrl() {
     const badArr = noBreaksBadWords.split(",", 200);
     const letterReg = reg.slice(0,3);
     
-    if (regValid) {
+    if (regMatch) {
         
         if (yearReq) {
             let badArrTrim = [];

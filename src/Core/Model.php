@@ -169,54 +169,22 @@ protected function getConvertions() {
    Price AS Price
     FROM History LEFT JOIN Cars ON
   History.`Registration` = Cars.`Registration`";
+
   $stmt = $this->connect()->prepare($sql);
   $stmt->execute();
   $historyPrice = $stmt->fetchAll();
-  var_dump($historyPrice);
+  
+  /* Convert dates into days rounded up and total cost for each
+  check-out - check-in */
   for ($i=0; $i< count($historyPrice); $i++) {
     $interval = strtotime($historyPrice[$i]['Rented until']) 
     - strtotime($historyPrice[$i]['Rented from']);
 
-    //$days[] = ceil($interval/86400);
     $historyPrice[$i]['Days'] = ceil($interval/86400);
     $historyPrice[$i]['Cost'] = $historyPrice[$i]['Price'] * $historyPrice[$i]['Days'];
-
-    //$reg[] = $historyPrice[$i]['Registration'];
-    }
-    //var_dump($days);
-    //var_dump($cost);
-    //var_dump($historyPrice);
+  }
     return ($historyPrice);
 }
-
-
-  //convert dates into days and total cost for displaying history
- /* protected function getConvertions() {
-    $sqlDates = "SELECT `Rented from`,`Rented until`, `Registration` FROM History";
-    $stmt = $this->connect()->prepare($sqlDates);
-    $stmt->execute();
-    $dates = $stmt->fetchAll();
-
-    $sqlPrice = "SELECT `Price` FROM Cars 
-      RIGHT JOIN History ON
-      Cars.Registration = History.Registration";
-      $stmt2 = $this->connect()->prepare($sqlPrice);
-      $stmt2->execute();
-      $prices = $stmt2->fetchAll();
-
-    for ($i=0; $i< count($dates); $i++) {
-      $interval = strtotime($dates[$i]['Rented until']) 
-      - strtotime($dates[$i]['Rented from']);
-
-      $days[] = ceil($interval/86400);
-
-      $cost[] = $prices[$i]['Price'] * $days[$i];
-
-      $reg[] = $dates[$i]['Registration'];
-      }
-      return array($days, $cost, $reg);
-  }
-*/
 
   //Set user to edit
 protected function setUserEdit($name, $address, $phone, $postal, $pn) {

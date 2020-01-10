@@ -39,11 +39,19 @@ XX add Car exakt number of letters in JS,  XX
 XX days in personnummer isnt calculating correctly in JS XX
 
 
-History days and cost are wrong.
+XX  History days and cost are wrong. XX
+
+no edit on cars and customers while rented out 
+
 Add Sum
+
+
+Personal number i cars? går att använda?
 
 Cleanup JS code w language and commenting
 Commenting PHP code
+
+Skriva rapport - generera pdf
 
 Add to github
 Add to binero

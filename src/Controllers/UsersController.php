@@ -32,20 +32,28 @@ class UsersController extends Model {
 
         //Get selected User for Edit
         public function getUserCtrl($twig) {
-            $pn = explode("/", $_SERVER['REQUEST_URI']);
+            $pn = explode("/", utf8_encode($_SERVER['REQUEST_URI']));
+
+            //Replace html characters with Å Ä Ö and whitespace
+            $replaceSwe = ["%C3%A5" => "å", '%C3%A4'=> "ä","%C3%B6" => "ö", 
+            "%C3%85" => "Å", "%C3%84" => "Ä", "%C3%96" => "Ö", "%20" => " "];
+
+            for ($i=0; $i<count($pn); $i++) {
+               $cleanPn[$i] = str_replace(array_keys($replaceSwe), $replaceSwe, $pn[$i]);
+            }
 
             $map = [
-            "pn" => $pn[2],
-            "name" => str_replace("%20"," ", $pn[3]),
-            "address" => str_replace("%20"," ", $pn[4]),
-            "phone" => $pn[5],
-            "postal" => str_replace("%20"," ", $pn[6])];
+            "pn" => $cleanPn[2],
+            "name" => $cleanPn[3],
+            "address" => $cleanPn[4],
+            "phone" => $cleanPn[5],
+            "postal" => $cleanPn[6]];
     
             if (isset($_POST['postal'])) {
                 $this->editUser();
-                return $twig->loadTemplate("UserEdit.twig")->render($map);
+            return $twig->loadTemplate("usersAll.twig")->render($map);
             } else {
-                return $twig->loadTemplate("UserEdit.twig")->render($map);
+            return $twig->loadTemplate("UserEdit.twig")->render($map);
             }
         }
 

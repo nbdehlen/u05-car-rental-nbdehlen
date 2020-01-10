@@ -18,7 +18,7 @@
         <td> {{ value['Phone number'] }}</td>
         
         {% if value['Cars'] != NULL %}
-      <td><form method="post" action="/UserEdit/{{ value['Personal number'] }}/{{ value['Full name'] }}/{{ value.Address }}/{{ value['Phone number'] }}/{{ value['Postal address'] }}">
+      <td><form method="post" action="/UserEdit/">
         <input type="submit" value="Editera" disabled>
         </form> </td>
 
@@ -26,7 +26,7 @@
       <input type="submit" value="Ta bort" disabled>
       </form> </td>
          {% else %}
-             <td><form method="post" action="/UserEdit/{{ value['Personal number'] }}/{{ value['Full name'] }}/{{ value.Address }}/{{ value['Phone number'] }}/{{ value['Postal address'] }}">
+             <td><form method="post" accept-charset="UTF-8" action="/UserEdit/{{ value['Personal number'] }}/{{ value['Full name'] }}/{{ value.Address }}/{{ value['Phone number'] }}/{{ value['Postal address'] }}">
         <input type="submit" value="Editera">
         </form> </td>
         

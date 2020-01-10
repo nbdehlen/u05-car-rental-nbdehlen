@@ -2,10 +2,10 @@
 {% include '/Partials/menu.html' %}
 
 <h1> Editera kund </h1>
-   <form method="post" name="editUser" action="/UserEdit/{{ value.pn }}/{{ value.name }}/{{ value.address }}/{{ vale.phone }}/{{ vale.postal }}" onsubmit="return addCustomerCtrl();">
+   <form method="post" accept-charset="UTF-8" name="editUser" action="/UserEdit/{{ value.pn }}/{{ value.name }}/{{ value.address }}/{{ vale.phone }}/{{ vale.postal }}" onsubmit="return controlPn();">
    <td>Personnummer: <input id="personnummer" readonly name="pn" value="{{ pn }}"> 
     </td>
-    <br>
+    <br/>
   <label for="namn"> Namn: </label>
   <input type="text" id="name" name="name" required value="{{name}}"> <br>
  <br>
@@ -20,5 +20,7 @@
 
    <input type="submit" value="Editera">
     </form>
-    <script src='/../../script/script.js'></script>
-{% include '/Partials/bottom.html' %}
+
+<script src="/../script/script.js"></script>
+</body>
+</html>

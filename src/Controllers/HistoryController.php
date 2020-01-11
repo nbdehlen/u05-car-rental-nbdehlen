@@ -32,7 +32,6 @@ class HistoryController extends Model {
         $map = ["getRegRented" => $getRegRented];
 
         if (isset($_POST['reg'])) {
-            //var_dump($_POST);
             $reg = $_POST['reg'];
             $this->setRegReturned($reg);
         }
@@ -40,11 +39,8 @@ class HistoryController extends Model {
     }
 
     public function displayHistory($twig) {
-        //$getHistory = $this->getHistory();
         $historyPrice = $this->getConvertions();
-        //var_dump($historyPrice);
         $map = ["historyPrice" => $historyPrice];
-           // $map = ["getConv" => $convertions];
 
     return $twig->loadTemplate("HistoryAll.twig")->render($map);
     }

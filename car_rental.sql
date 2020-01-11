@@ -30,7 +30,7 @@ CREATE TABLE `History` (
   `Registration` VARCHAR(6) NOT NULL,
   `Personal number` VARCHAR(10),
   `Rented from` DATETIME DEFAULT NULL,
-  `Rented until` DATETIME DEFAULT NULL,
+  `Rented until` DATETIME DEFAULT NOW(),
   FOREIGN KEY (`Registration`) REFERENCES Cars(`Registration`),
   FOREIGN KEY (`Personal number`) REFERENCES Customers(`Personal number`));
   

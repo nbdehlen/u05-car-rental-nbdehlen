@@ -4,21 +4,19 @@
 
   class Model extends Config {
 
-    //Get users and list of which are currently renting
+    //Get all users and Cars column to disable customers from being edited/deleted if renting
       protected function getAllUsers() {
 
-        $sql = "SELECT Customers.`Personal number`, `Full name`, `Address`, `Postal address`,
-        `Phone number`,
+        $sql = "SELECT Customers.*,
          `Rented by` AS Cars
          FROM Customers INNER JOIN Cars ON 
          Customers.`Personal number` = Cars.`Rented by`
          UNION
-         SELECT Customers.`Personal number`, `Full name`, `Address`, `Postal address`,
-        `Phone number`,
+         SELECT Customers.*,
         `Rented by` AS Cars
         FROM Customers LEFT JOIN Cars ON
         Customers.`Personal number` = Cars.`Rented by`";
-
+        
         $stmt = $this->connect()->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
@@ -130,7 +128,6 @@ protected function setCarRemove($reg) {
 
   //Set history for cars rented
   protected function setRegReturned($reg){
-    try {
       $sql = "INSERT INTO History (`Registration`, `Personal number`,
       `Rented from`)
       SELECT Registration, `Rented by`, `Rented from`
@@ -146,29 +143,15 @@ protected function setCarRemove($reg) {
 
       $stmt2 = $this->connect()->prepare($sql2);
       $stmt2->execute([$reg]);
-
-    } catch (PDOException $e) {
-      echo "Error : " . $e->getMessage();
-    }
   }
-  //get history
-  /*protected function getHistory() {
-      $sql = "SELECT * FROM History";
-      $stmt = $this->connect()->prepare($sql);
-      $stmt->execute();
-      return $stmt->fetchAll();
-  }*/
 
+
+/* Get History, days rented and total costs */
 protected function getConvertions() {
-  $sql = "SELECT History.`Registration`, History.`Personal number`,
-  History.`Rented from`, History.`Rented until`,
+  $sql = "SELECT History.*,
   Price AS Price FROM History INNER JOIN Cars ON
-   History.`Registration` = Cars.`Registration` 
-   UNION SELECT History.`Registration`, History.`Personal number`,
-   History.`Rented from`, History.`Rented until`,
-   Price AS Price
-    FROM History LEFT JOIN Cars ON
-  History.`Registration` = Cars.`Registration`";
+   (History.`Registration` = Cars.`Registration`
+   AND History.`Rented from` != History.`Rented until`)";
 
   $stmt = $this->connect()->prepare($sql);
   $stmt->execute();

@@ -4,6 +4,8 @@ use Main\Core\Model;
 
 class UsersController extends Model {
 
+    /* Displaying list of users and calling createUser function
+       if the form has successfully been sent */
     public function userAdd($twig) {
         if (isset($_POST['PersonNumber'])) {
             $this->createUser();
@@ -12,7 +14,7 @@ class UsersController extends Model {
             return $twig->loadTemplate("UserAdd.twig")->render([]);
         }
     }
-    
+    //Sending data back to model to add customer
     public function createUser() {
         $PersonNumber = $_POST['PersonNumber'];
         $Name = $_POST['FullName'];

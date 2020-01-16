@@ -5,36 +5,32 @@ use Main\Core\Model;
 
 class HistoryController extends Model {
 
+    /* checkOutCar function needs to run before fetching the list of free 
+       cars from the model to reflect that the car is no longer available to rent */
     public function checkOut($twig) {
-        $getReg = $this->getRegFree();
-        $getPr = $this->getPr();
-        $map = ["getReg" => $getReg, "getPr" => $getPr];
-
-        if (isset($_POST['pr'])) {
-            echo "checking out!";
+         if (isset($_POST['pr'])) {
             $this->checkOutCar();
-            return $twig->loadTemplate("CheckOut.twig")->render($map);
         }
-        else {
+            $getReg = $this->getRegFree();
+            $getPr = $this->getPr();
+            $map = ["getReg" => $getReg, "getPr" => $getPr];
             return $twig->loadTemplate("CheckOut.twig")->render($map);
-        }
     }
 
     public function checkOutCar() {
         $rentedBy = $_POST['pr'];
         $reg  = $_POST['reg'];
-        echo $rentedBy . ' ' . $reg;
         $this->setCheckOutTime($rentedBy, $reg);
     }
-
+    
+    /* Same principle as checkOut function */
     public function checkIn($twig){
-        $getRegRented = $this->getRegRented();
-        $map = ["getRegRented" => $getRegRented];
-
         if (isset($_POST['reg'])) {
             $reg = $_POST['reg'];
             $this->setRegReturned($reg);
         }
+        $getRegRented = $this->getRegRented();
+        $map = ["getRegRented" => $getRegRented];
         return $twig->loadTemplate("CheckIn.twig")->render($map);
     }
 

@@ -1,0 +1,17 @@
+{% include '/Partials/top.html' %}
+{% include '/Partials/menu.html' %}
+
+<table>
+<h2> Biluppgifter ändrade i registret: </h2>
+<tr><td> Registreringsnummer: {{ Registration }} </td></tr>
+<tr><td> Tillverkare: {{ Make }} </td></tr>
+<tr><td> Färg: {{ Color }} </td></tr>
+<tr><td> Tillverkningsår: {{ Year }} </td></tr>
+<tr><td> Dygnshyra: {{ Price }} </td></tr>
+</table>
+<br>
+<form method="post" action="/CarsAll">
+<input type="submit" value="Ok">
+</form>
+
+{% include '/Partials/bottom.html' %}

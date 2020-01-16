@@ -3,7 +3,7 @@
 
 <h1> Checka ut bil <h2>
 <form method="post" name="CheckOut" action="/CheckOut"
-onsubmit="return confirm('Are you sure you want to rent this car?');">
+onsubmit="return confirmCheckOut();">
 
 
   <label for="pr"> Kund: </label>
@@ -29,4 +29,17 @@ onsubmit="return confirm('Are you sure you want to rent this car?');">
     <input type="submit" value="Checka ut">
     </form>
 
+<script>
+    function confirmCheckOut() {
+        let answer = confirm("Är du säker på att du vill checka ut bilen?");
+        if (answer) {
+            alert("Du har checkat ut bilen.");
+            return true;
+        } else {
+            alert("Utcheckning avbruten.");
+            return false;
+        }
+    }
+  
+</script>
 {% include '/Partials/bottom.html' %}

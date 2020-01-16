@@ -34,7 +34,7 @@
         <input type="submit" value="Editera">
         </form></td>
             <td> <form method="post" action="/CarRemove/{{ value.Registration }}" {#/{{ value['Rented by'] }} #}
-            onsubmit="return confirm('Ta bort bilen från bilregistret?');">
+            onsubmit="confirmRemoveCar();">
         <input type="submit" value="Ta bort" name="Registration">
         {% endif %}
         </form></td>
@@ -47,4 +47,17 @@
         <form method="post" action="/CarAdd">
         <input type="submit" value="Lägg till bil">
       </form>
+
+<script>
+function confirmRemoveCar() {
+    let answer = confirm('Ta bort bilen från bilregistret?');
+    if (answer) {
+        alert("Bilen borttagen från registret.");
+        return true;
+    } else {
+        alert("Borttagning av bilen avbruten");
+        return false;
+    }
+}    
+</script>
 {% include '/Partials/bottom.html' %}

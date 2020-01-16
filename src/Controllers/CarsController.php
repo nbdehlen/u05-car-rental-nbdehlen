@@ -17,7 +17,7 @@ class CarsController extends Model {
 
         if (isset($_POST['Registration'])) {
             $this->createCar();
-            return $twig->loadTemplate("CarAdd.twig")->render($map);
+            return $twig->loadTemplate("CarAdded.twig")->render($_POST);
         } else {
             return $twig->loadTemplate("CarAdd.twig")->render($map);
         }
@@ -47,7 +47,7 @@ class CarsController extends Model {
 
         if (isset($_POST['Year'])) {
             $this->editCar();
-            return $twig->loadTemplate("CarEdit.twig")->render($map);
+            return $twig->loadTemplate("CarEdited.twig")->render($_POST);
         } else {
             return $twig->loadTemplate("CarEdit.twig")->render($map);
         }
@@ -68,6 +68,7 @@ class CarsController extends Model {
         $regExplode = explode("/", $_SERVER['REQUEST_URI']);
         $reg = $regExplode[2];
          $this->setCarRemove($reg);
-        return $twig->loadTemplate("CarsAll.twig")->render([]);
+        //return $twig->loadTemplate("CarsAll.twig")->render([]);
+        return $this->getCarsCtrl($twig);
     }
 }

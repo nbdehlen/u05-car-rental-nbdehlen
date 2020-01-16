@@ -31,7 +31,7 @@ function controlPn() {
 
     let lastDigit = (10 - (digits % 10)) % 10;
     if (pnStr.slice(-1) != lastDigit) {
-        alert("Felaktig kontrollsiffra " + lastDigit + "   " +digits);
+        alert("Felaktig kontrollsiffra!");
         return false;
     } 
 
@@ -74,15 +74,13 @@ function controlPn() {
             alert("Kund tillagd/ändrad i registret");
             return true;
         } else {
-            alert("Felaktigt personnummer" + pn);
+            alert("Felaktigt personnummer: " + pn);
             return false;
         }
     }
     alert("Telefonnumret måste börja med en nolla och innehålla exakt 10 nummer");
     return false;
 }
-
-function addCustomerCtrl() {}
 
 function addCarCtrl() {
     const reg = document.querySelector("#Registration").value;

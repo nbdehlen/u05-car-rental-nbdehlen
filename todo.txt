@@ -48,10 +48,19 @@ XX Add Sum XX
 
 XX Personal number i cars? går att använda? XX
 
-Cleanup JS code w language and commenting
-Commenting PHP code
+XX Cleanup JS code w language and commenting XX
+XX Commenting PHP code XX
 
-Skriva rapport - generera pdf
+XX Skriva rapport - generera pdf XX
 
-Add to github
-Add to binero
+XX Add to github XX
+XX Add to binero XX
+
+XX Twigs för "car edited", "car removed", "user edited", "user removed". XX
+XX twig för "user added, "car added". XX
+
+XXJs funktioner för checkin, checkout. XX
+
+checkin not reloading correctly.
+
+Ta Bort echos / vardumps

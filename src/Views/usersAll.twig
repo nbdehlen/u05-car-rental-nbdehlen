@@ -30,8 +30,7 @@
         <input type="submit" value="Editera">
         </form> </td>
         
-            <td><form method="post" onsubmit="confirm('Är du säker på att du vill ta bort användaren?');" action="/UserRemove/{{ value['Personal number'] }}/{{ value['Full name'] }}/{{ value.Address }}/{{ value['Phone number'] }}/{{ value['Postal address'] }}"
-            disabled>
+            <td><form method="post" onsubmit="return confirmRemoveUser();" action="/UserRemove/{{ value['Personal number'] }}/{{ value['Full name'] }}/{{ value.Address }}/{{ value['Phone number'] }}/{{ value['Postal address'] }}">
             <input type="submit" value="Ta bort"></form> </td>
       {% endif %}
 {% endfor %}
@@ -44,4 +43,17 @@
         <form method="post" action="/UserAdd">
         <input type="submit" value="Lägg till kund">
       </form>
+
+<script>
+function confirmRemoveUser() {
+    let answer = confirm("Är du säker på att du vill ta bort användaren?");
+    if (answer) {
+        alert("Användare borttagen.");
+        return true;
+    } else {
+        alert("Borttagning avbruten.");
+        return false;
+    }
+}
+</script>
 {% include '/Partials/bottom.html' %}

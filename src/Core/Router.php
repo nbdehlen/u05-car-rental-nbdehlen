@@ -13,12 +13,6 @@
           $controller = new CarsController();
           return $controller->getCarsCtrl($twig);
         }
-        /*else if (preg_match("/^\/(UserAdded)/", $path)
-        ||  preg_match("/^\/(UserEdited)/", $path)
-         || preg_match("/^\/(UserRemoved)/", $path)) {
-          $controller = new UsersController();
-          return $controller->userConfirmed($twig);
-        }*/
         else if ($path == "/CarAdd") {
           $controller = new CarsController();
           return $controller->carAdd($twig);

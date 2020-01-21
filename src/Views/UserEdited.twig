@@ -1,0 +1,17 @@
+{% include '/Partials/top.html' %}
+{% include '/Partials/menu.html' %}
+
+<table>
+<h2> Användaruppgifter ändrade i registret: </h2>
+<tr> <td> Personnummer: {{ pn }} </td> </tr>
+<tr><td> Namn: {{ name }} </td></tr>
+<tr><td> Adress: {{ address }} </td></tr>
+<tr><td> PostAdress: {{ postal }} </td></tr>
+<tr><td> Telefonnummer: {{ phone }} </td></tr>
+</table>
+<br>
+<form method="post" action="/usersAll">
+<input type="submit" value="Ok">
+</form>
+
+{% include '/Partials/bottom.html' %}

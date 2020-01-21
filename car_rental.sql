@@ -18,7 +18,7 @@ CREATE TABLE Cars (
   `Price` FLOAT UNSIGNED NOT NULL,
   `Rented by` VARCHAR(10) DEFAULT "Free",
   `Rented from` DATETIME DEFAULT NULL,
-  PRIMARY KEY(`Registration`);
+  PRIMARY KEY(`Registration`));
 
 CREATE TABLE `Allowed Colors` (
 `Colors` VARCHAR(20) NOT NULL KEY);

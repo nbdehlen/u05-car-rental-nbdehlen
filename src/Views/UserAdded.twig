@@ -1,0 +1,16 @@
+{% include '/Partials/top.html' %}
+{% include '/Partials/menu.html' %}
+<table>
+<h2> Användare tillagd i registret: </h2>
+<tr> <td> Personnummer: {{ Person.PersonNumber }} </td> </tr>
+<tr><td> Namn: {{ Person.FullName }} </td></tr>
+<tr><td> Adress: {{ Person.Address }} </td></tr>
+<tr><td> PostAdress: {{ Person.PostalAddress }} </td></tr>
+<tr><td> Telefonnummer: {{ Person.telefonnummer }} </td></tr>
+</table>
+<br>
+<form method="post" action="/usersAll">
+<input type="submit" value="Ok">
+</form>
+
+{% include '/Partials/bottom.html' %}

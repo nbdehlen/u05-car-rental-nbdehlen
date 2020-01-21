@@ -9,7 +9,7 @@
     public function route($request, $twig) {
         $path = $request->getPath();
         
-        if ($path == "/carsAll") {
+        if ($path == "/CarsAll") {
           $controller = new CarsController();
           return $controller->getCarsCtrl($twig);
         }

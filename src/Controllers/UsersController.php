@@ -8,8 +8,9 @@ class UsersController extends Model {
        if the form has successfully been sent */
     public function userAdd($twig) {
         if (isset($_POST['PersonNumber'])) {
+            $map = ["Person" => $_POST];
             $this->createUser();
-            return $twig->loadTemplate("UserAdd.twig")->render([]);
+            return $twig->loadTemplate("UserAdded.twig")->render($map);
         } else {
             return $twig->loadTemplate("UserAdd.twig")->render([]);
         }
@@ -50,10 +51,10 @@ class UsersController extends Model {
             "address" => $cleanPn[4],
             "phone" => $cleanPn[5],
             "postal" => $cleanPn[6]];
-    
+                
             if (isset($_POST['postal'])) {
                 $this->editUser();
-            return $twig->loadTemplate("userEdit.twig")->render($map);
+            return $twig->loadTemplate("UserEdited.twig")->render($_POST);
             } else {
             return $twig->loadTemplate("UserEdit.twig")->render($map);
             }
@@ -73,8 +74,8 @@ class UsersController extends Model {
     public function removeUser($twig) {
         $regExplode = explode("/", $_SERVER['REQUEST_URI']);
         $pn = $regExplode[2];
-        echo "användare borttagen";
         $this->setUserRemove($pn);
-        return $twig->loadTemplate("usersAll.twig")->render([]);
+        //return $twig->loadTemplate("usersAll.twig")->render([]);
+        return $this->getUser($twig);
     }
 }

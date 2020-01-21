@@ -2,7 +2,7 @@
 {% include '/Partials/menu.html' %}
 
 <h1> Checka in bil <h2>
-<form method="post" name="CheckIn" action="/CheckIn" onsubmit="return confirm('Are you sure you want to return this car?');">
+<form method="post" name="CheckIn" action="/CheckIn" onsubmit="return confirmReturnCar();">
 
 
   <label for="reg"> Bil: </label>
@@ -19,5 +19,16 @@
     <input type="submit" value="Checka in">
     </form>
 
-
+<script>
+function confirmReturnCar() {
+    answer = confirm("Är du säker på att du vill checka in bilen?");
+    if (answer) {
+        alert("Bilen incheckad.");
+        return true;
+    } else {
+        alert("Incheckning avbruten.")
+        return false;
+    }
+}
+</script>
 {% include '/Partials/bottom.html' %}

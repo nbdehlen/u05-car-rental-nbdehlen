@@ -1,10 +1,10 @@
 <?php
   namespace Main\Core;
-  use PDOException;
 
   class Model extends Config {
 
-    //Get all users and Cars column to disable customers from being edited/deleted if renting
+    /* Get all users and Cars column to disable customers 
+    from being edited/deleted if renting */
       protected function getAllUsers() {
 
         $sql = "SELECT Customers.*,
